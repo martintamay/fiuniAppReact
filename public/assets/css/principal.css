@@ -1,0 +1,18 @@
+#mobile {
+  padding-top: 20px;
+}
+
+/* NOTAS */
+.tabla-notas {
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 1px solid #dee2e6;;
+}
+.tabla-notas .btn {
+  width: 100%;
+}
+
+.lista-materias li {
+  cursor: pointer;
+}
