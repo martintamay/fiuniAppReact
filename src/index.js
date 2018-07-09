@@ -15,6 +15,8 @@ import Notas from './containers/notas';
 import NotasPorAprobar from './containers/notas_por_aprobar';
 import MateriasCursandose from './containers/materias_cursandose';
 import MateriasACargo from './containers/materias_a_cargo';
+import CargaNotas from './containers/carga-notas';
+import Login from './containers/login';
 
 export const develop = window.location.hostname==="localhost";
 
@@ -55,14 +57,16 @@ if(isMobile()){
   ReactDOM.render(
     <Provider store={createStoreWithMiddleware(reducers)}>
       <BrowserRouter>
-        <div>
+        <div className="super-container">
           <Route path="/" component={Menu} />
           <Switch>
             <Route path="/:user_id/notas" component={Notas} />
             <Route path="/:user_id/materias" component={MateriasCursandose} />
             <Route path="/:user_id/materias-a-cargo" component={MateriasACargo} />
+            <Route path="/:materia_id/cargar-notas" component={CargaNotas} />
             <Route path="/por-aprobar" component={NotasPorAprobar} />
             <Route path="/prueba" component={Prueba} />
+            <Route path="/login" component={Login} />
             <Route path="/" component={Prueba} />
           </Switch>
         </div>

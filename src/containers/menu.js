@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
-import { loguear } from '../actions';
+import { loguear, reloguin } from '../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { NotificationContainer } from 'react-notifications';
+import { Link, Redirect } from 'react-router-dom';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 
 class Menu extends Component {
   componentDidMount(){
-    /*if(this.props.usuario===null || this.props.usuario===undefined){
-      if(localStorage.getItem("session_token")!=null){
-        this.props.recuperarLogueo(localStorage.getItem("session_token"));
-      }
-    }*/
+    this.props.reloguin();
   }
 
   isLogued(){
@@ -23,6 +19,16 @@ class Menu extends Component {
   }
 
   render(){
+    if(window.location.href.includes("login")){
+      return <div id="NoMenu"></div>;
+    }
+    if(this.props.usuario!==null && this.props.usuario.id===undefined){
+      let current = window.location.pathname;
+      sessionStorage.setItem("previous_page", current);
+      console.log("prev", sessionStorage.getItem("previous_page"));
+      NotificationManager.warning("Inicie Sesión para continuar");
+      return <Redirect to="/login" />;
+    }
     return (
       <section id="menu">
         <NotificationContainer />
@@ -58,7 +64,8 @@ function mapStateToProps({ usuario }) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    loguear: loguear
+    loguear: loguear,
+    reloguin: reloguin
   }, dispatch)
 }
 

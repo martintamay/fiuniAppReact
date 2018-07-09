@@ -1,5 +1,8 @@
-//const SERVER = "http://127.0.0.1:3000/api/";
+import axios from 'axios';
 
+const SERVER = "https://cryptic-spire-75762.herokuapp.com/api";
+
+export const RELOGIN = "RELOGIN";
 export const LOGIN_REQ = "LOGIN_REQ";
 export const GET_NOTAS = "GET_NOTAS";
 export const GET_MATERIAS = "GET_MATERIAS";
@@ -8,10 +11,58 @@ export const GET_MATERIAS_CURSANDOSE = "GET_MATERIAS_CURSANDOSE";
 export const GET_MATERIAS_A_CARGO = "GET_MATERIAS_A_CARGO";
 export const GET_ALUMNOS_PARA_CARGA = "GET_ALUMNOS_PARA_CARGA";
 
-export function loguear(usuario, contrasenha){
+function setSessionStorage(mantener){
+  if(mantener===true){
+    localStorage.setItem("session_token", "true");
+    sessionStorage.removeItem("session_token");
+  } else {
+    sessionStorage.setItem("session_token", "true");
+    localStorage.removeItem("session_token");
+  }
+}
+
+export function loguear(correo, contrasenha, mantener=false){
+  setSessionStorage(mantener);
+
+
+  let req = axios.put(`${SERVER}/people/log_in`, {
+    person: {
+      email: `${correo}@fiuni.edu.py`,
+      password: contrasenha
+    }
+  });
+
   return {
     type: LOGIN_REQ,
-    payload: {}
+    payload: req
+  };
+  /*return {
+    type: LOGIN_REQ,
+    payload: {
+      email: "martintamay9@gmail.com",
+      session_token: "61bd1313cb1170c5f7288fd4a4a89a2969876a21",
+      id: 1,
+      names: "Martín Tamay",
+      ci: "4315943",
+      student: {
+          id: 1,
+          entry_year: 2014
+      },
+      professor: null,
+      administrator: null
+    }
+  };*/
+}
+
+export function reloguin(){
+  setSessionStorage(true);
+  /*console.log("relogin");
+  console.log("local", localStorage.getItem("session_token"));
+  console.log("sesion", sessionStorage.getItem("session_token"));*/
+  return {
+    type: RELOGIN,
+    payload: {
+    }
   };
 }
 
@@ -19,19 +70,35 @@ export function enviarAprobados(notes){
   console.log(notes);
 }
 
-export function getAlumnosParaCarga(idusuario){
+export function getAlumnosParaCargar(idmateria){
   return {
     type: GET_ALUMNOS_PARA_CARGA,
     payload: [
       {
-        "id": 1,
-        "name": "Física 1",
-        "semester": 1
+        id: 1,
+        finished: null,
+        finish_date: null,
+        student: {
+          id: 1,
+          person: {
+            id: 1,
+            names: "Martín Tamay",
+            ci: "4315943"
+          }
+        }
       },
       {
-        "id": 2,
-        "name": "Análisis 1",
-        "semester": 1
+        id: 2,
+        finished: null,
+        finish_date: null,
+        student: {
+          id: 2,
+          person: {
+            id: 2,
+            names: "Frijolito",
+            ci: "5486975"
+          }
+        }
       }
     ]
   };

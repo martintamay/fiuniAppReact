@@ -3,7 +3,6 @@ import { getNotasPorAprobar } from '../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-//TODO: hacer que al elegir uno lleve a la pantalla para la revisión
 import RevisionMateria from '../components/revision-materia';
 
 class NotasPorAprobar extends Component {

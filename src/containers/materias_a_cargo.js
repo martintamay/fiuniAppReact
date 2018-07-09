@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { getMateriasACargo } from '../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class MateriasACargo extends Component {
   componentDidMount(){
@@ -17,10 +18,11 @@ class MateriasACargo extends Component {
     let materias = this.props.materiasACargo;
     return materias.map((materia)=>{
       return (
-        <li className="list-group-item list-group-item-action"
-          key={materia.id}>
+        <Link className="list-group-item list-group-item-action"
+          key={materia.id}
+          to={`/${materia.id}/cargar-notas`} >
           {materia.name}
-        </li>
+        </Link>
       );
     });
   }
