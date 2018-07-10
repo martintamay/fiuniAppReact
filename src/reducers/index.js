@@ -4,8 +4,10 @@ import notasPorAprobarReducer from './notas-por-aprobar-reducer';
 import materiasCursandoseReducer from './materias-cursandose-reducer';
 import materiasACargoReducer from './materias-a-cargo-reducer';
 import materiasReducer from './materias-reducer';
+import carrerasReducer from './carreras-reducer';
 import notasReducer from './notas-reducer';
 import usuarioReducer from './usuario-reducer';
+import alumnoReducer from './alumno-reducer';
 import alumnosParaCargaReducer from './alumnos-para-carga-reducer';
 
 
@@ -15,9 +17,11 @@ const rootReducer = combineReducers(
     notasPorAprobar: notasPorAprobarReducer,
     notas: notasReducer,
     materias: materiasReducer,
+    carreras: carrerasReducer,
     materiasCursandose: materiasCursandoseReducer,
     materiasACargo: materiasACargoReducer,
-    alumnosParaCargar: alumnosParaCargaReducer
+    alumnosParaCargar: alumnosParaCargaReducer,
+    alumno: alumnoReducer
   }
 );
 

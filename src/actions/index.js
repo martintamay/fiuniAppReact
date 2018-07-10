@@ -1,15 +1,18 @@
 import axios from 'axios';
 
-const SERVER = "https://cryptic-spire-75762.herokuapp.com/api";
+const SERVER = "https://fiuni-app.herokuapp.com/api";
 
-export const RELOGIN = "RELOGIN";
+export const ERRLOGIN = "ERRLOGIN";
 export const LOGIN_REQ = "LOGIN_REQ";
+export const RELOGIN_REQ = "RELOGIN_REQ";
 export const GET_NOTAS = "GET_NOTAS";
 export const GET_MATERIAS = "GET_MATERIAS";
+export const GET_CARRERAS = "GET_CARRERAS";
 export const GET_NOTAS_POR_APROBAR = "GET_NOTAS_POR_APROBAR";
 export const GET_MATERIAS_CURSANDOSE = "GET_MATERIAS_CURSANDOSE";
 export const GET_MATERIAS_A_CARGO = "GET_MATERIAS_A_CARGO";
 export const GET_ALUMNOS_PARA_CARGA = "GET_ALUMNOS_PARA_CARGA";
+export const ALUMNO_REQ = "ALUMNO_REQ";
 
 function setSessionStorage(mantener){
   if(mantener===true){
@@ -23,8 +26,6 @@ function setSessionStorage(mantener){
 
 export function loguear(correo, contrasenha, mantener=false){
   setSessionStorage(mantener);
-
-
   let req = axios.put(`${SERVER}/people/log_in`, {
     person: {
       email: `${correo}@fiuni.edu.py`,
@@ -36,33 +37,56 @@ export function loguear(correo, contrasenha, mantener=false){
     type: LOGIN_REQ,
     payload: req
   };
-  /*return {
-    type: LOGIN_REQ,
-    payload: {
-      email: "martintamay9@gmail.com",
-      session_token: "61bd1313cb1170c5f7288fd4a4a89a2969876a21",
-      id: 1,
-      names: "Martín Tamay",
-      ci: "4315943",
-      student: {
-          id: 1,
-          entry_year: 2014
-      },
-      professor: null,
-      administrator: null
-    }
-  };*/
+}
+
+export function getAlumno(idalumno){
+  let req = axios.get(`${SERVER}/students/${idalumno}`,{
+    headers: {'Accept': 'application/json'}
+  });
+  return {
+    type: ALUMNO_REQ,
+    payload: req
+  };
+}
+
+
+export function getCarreras(){
+  let req = axios.get(`${SERVER}/career`);
+
+  return {
+    type: GET_CARRERAS,
+    payload: req
+  };
+}
+
+export function cerrarSesion(){
+  sessionStorage.removeItem("session_token");
+  localStorage.removeItem("session_token");
+  return {
+    type: ERRLOGIN,
+    payload: {}
+  };
 }
 
 export function reloguin(){
-  setSessionStorage(true);
-  /*console.log("relogin");
-  console.log("local", localStorage.getItem("session_token"));
-  console.log("sesion", sessionStorage.getItem("session_token"));*/
-  return {
-    type: RELOGIN,
-    payload: {
+  if (sessionStorage.getItem("session_token")===null &&
+    localStorage.getItem("session_token")===null) {
+    return {
+      type: ERRLOGIN,
+      payload: {}
+    };
+  }
+  let token = sessionStorage.getItem("session_token")===null ?
+                localStorage.getItem("session_token") :
+                sessionStorage.getItem("session_token");
+  let req = axios.put(`${SERVER}/people/relogin`, {
+    person: {
+      session_token: token
     }
+  });
+  return {
+    type: RELOGIN_REQ,
+    payload: req
   };
 }
 
@@ -123,20 +147,11 @@ export function getMateriasACargo(idusuario){
 }
 
 export function getMateriasCursandose(idalumno){
+  let req = axios.get(`${SERVER}/students/${idalumno}/subjects`);
+
   return {
     type: GET_MATERIAS_CURSANDOSE,
-    payload: [
-      {
-        "id": 1,
-        "name": "Física 1",
-        "semester": 1
-      },
-      {
-        "id": 2,
-        "name": "Análisis 1",
-        "semester": 1
-      }
-    ]
+    payload: req
   };
 }
 
