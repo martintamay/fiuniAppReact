@@ -145,7 +145,7 @@ class CargarAlumno extends Component {
 
     return (
       <section id="carga-alumno">
-        <div className="container">
+        <div className="container card">
           <h1>{this.state.edit?"Editar Alumno":"Agregar Alumno"}</h1>
           <hr/>
 
@@ -213,7 +213,7 @@ class CargarAlumno extends Component {
               </div>
             </div>
             <hr />
-            <div className="float-right">
+            <div className="float-right ml-auto">
               <button className="btn btn-primary">Guardar</button>
               <Link className="btn btn-secondary"
                 to="/">

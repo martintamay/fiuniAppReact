@@ -119,7 +119,7 @@ export default class RevisionMateria extends Component {
   render(){
     return (
       <section id="revision-materia">
-        <div className="container">
+        <div className="container card">
           <h1>Control de aprobación de {this.props.lista.subject.name}</h1>
           <hr />
           <table className="table table-striped table-bordered tabla-notas">
@@ -135,7 +135,7 @@ export default class RevisionMateria extends Component {
               {this.renderNotas(this.props.lista.notes)}
             </tbody>
           </table>
-          <div className="float-right">
+          <div className="float-right ml-auto">
             <button
               onClick={this.props.cancelar}
               type="button"

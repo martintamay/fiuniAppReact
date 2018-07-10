@@ -81,7 +81,7 @@ class CargarProfesor extends Component {
   render(){
     return (
       <section id="carga-profesor">
-        <div className="container">
+        <div className="container card">
           <h1>Nuevo Profesor</h1>
           <hr/>
 
@@ -131,7 +131,7 @@ class CargarProfesor extends Component {
               </div>
             </div>
             <hr />
-            <div className="float-right">
+            <div className="float-right ml-auto">
               <button className="btn btn-primary">Guardar</button>
               <Link className="btn btn-secondary" to="/">Cancelar</Link>
             </div>

@@ -17,7 +17,7 @@ export default class NotasListaMateria extends Component {
             `${nota.porcentaje}%` :
             nota.puntaje
           }
-          <small className="float-right">({nota.fecha})</small>
+          <small className="float-right ml-auto">({nota.fecha})</small>
         </li>
       );
     });
@@ -33,7 +33,7 @@ export default class NotasListaMateria extends Component {
       return (
         <div className="card-nota" key={materia_id}>
           <div className="card-header">
-            {materias[materia_id].name} <small className="float-right">{anho}</small>
+            {materias[materia_id].name} <small className="float-right ml-auto">{anho}</small>
           </div>
           <ul className="list-group list-group-flush">
             {renderNotas(notas[materia_id])}

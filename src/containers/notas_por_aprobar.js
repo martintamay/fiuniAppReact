@@ -56,7 +56,7 @@ class NotasPorAprobar extends Component {
     }
     return (
       <section id="notas-por-aprobar">
-        <div className="container">
+        <div className="container card">
           <h1>Notas por aprobar</h1>
           <hr />
           <table className="table table-striped table-bordered tabla-notas">

@@ -74,7 +74,7 @@ class CargaNotas extends Component {
   renderDatosExamen(){
     return (
       <section id="datos-examen">
-        <div className="container">
+        <div className="container card">
           <form onSubmit={this.onSubmitTipoExamen}>
             <h1>Datos del Examen</h1>
             <div className="form-row">
@@ -100,7 +100,7 @@ class CargaNotas extends Component {
                 </select>
               </div>
             </div>
-            <div className="float-right">
+            <div className="float-right ml-auto">
               <button value="submit" className="btn btn-primary">
                 Guardar
               </button>
@@ -127,7 +127,7 @@ class CargaNotas extends Component {
     if(this.props.alumnosParaCargar===null){
       return (
         <section id="materias-cursandose">
-          <div className="container">
+          <div className="container card">
             <h1>Carga Notas</h1>
             <ul className="list-group list-group-flush">
               <li className="list-group-item">
@@ -140,7 +140,7 @@ class CargaNotas extends Component {
     }
     return (
       <section id="materias-cursandose">
-        <div className="container">
+        <div className="container card">
           <h1>Carga Notas</h1>
           <div className="row">
             <div className="form-group col">
@@ -184,7 +184,7 @@ class CargaNotas extends Component {
             </tbody>
           </table>
           <hr />
-          <div className="btn-group float-right">
+          <div className="btn-group float-right ml-auto">
             <button
               type="button"
               className="btn btn-secondary"

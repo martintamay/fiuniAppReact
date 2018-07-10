@@ -36,11 +36,11 @@ if(isMobile()){
     return (
       <section id="mobile">
         <div className="container">
-          <div class="card text-white bg-danger mb-3">
-            <div class="card-header">Aún no implementado</div>
-            <div class="card-body">
-              <h5 class="card-title">Lo sentimos</h5>
-              <p class="card-text">La implementación de esta app para celulares está en progreso.</p>
+          <div className="card text-white bg-danger mb-3">
+            <div className="card-header">Aún no implementado</div>
+            <div className="card-body">
+              <h5 className="card-title">Lo sentimos</h5>
+              <p className="card-text">La implementación de esta app para celulares está en progreso.</p>
             </div>
           </div>
         </div>
@@ -71,10 +71,10 @@ if(isMobile()){
             <Route path="/por-aprobar" component={NotasPorAprobar} />
             <Route path="/cargar-materia" component={CargarMateria} />
             <Route path="/cargar-profesor" component={CargarProfesor} />
+            <Route path="/profesor/:idprofesor" component={CargarProfesor} />
             <Route path="/cargar-alumno" component={CargarAlumno} />
             <Route path="/prueba" component={Prueba} />
             <Route path="/login" component={Login} />
-            <Route path="/" component={Prueba} />
           </Switch>
         </div>
       </BrowserRouter>

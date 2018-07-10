@@ -77,7 +77,7 @@ class Notas extends Component {
     if (this.state.notasPorMateria===null || this.props.materias===null) {
         return (
           <section id="notas">
-            <div className="container">
+            <div className="container card">
               <h1>Notas</h1>
               <hr />
               <div className="card">
@@ -91,7 +91,7 @@ class Notas extends Component {
     }
     return (
       <section id="notas">
-        <div className="container">
+        <div className="container card">
           <h1>Notas</h1>
           <hr />
           <div className="card">

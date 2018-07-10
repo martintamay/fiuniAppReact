@@ -97,7 +97,7 @@ class CargarMateria extends Component {
     return (
       <section id="carga-materia">
         <form onSubmit={this.onSubmit}>
-          <div className="container">
+          <div className="container card">
             <h1>Nueva Materia</h1>
             <hr />
             <div className="row">
@@ -131,7 +131,7 @@ class CargarMateria extends Component {
               </div>
             </div>
             <hr />
-            <div className="float-right">
+            <div className="float-right ml-auto">
               <button className="btn btn-primary">Guardar</button>
               <Link className="btn btn-secondary" to="/materias">Cancelar</Link>
             </div>

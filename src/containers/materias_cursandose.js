@@ -28,7 +28,7 @@ class MateriasCursandose extends Component {
     if(this.props.materiasCursandose===null){
       return (
         <section id="materias-cursandose">
-          <div className="container">
+          <div className="container card">
             <h1>Materias Cursándose</h1>
             <ul className="list-group list-group-flush">
               <li className="list-group-item">
@@ -41,7 +41,7 @@ class MateriasCursandose extends Component {
     }
     return (
       <section id="materias-cursandose">
-        <div className="container">
+        <div className="container card">
           <h1>Materias Cursándose</h1>
           <ul className="list-group list-group-flush">
             {this.renderMaterias()}

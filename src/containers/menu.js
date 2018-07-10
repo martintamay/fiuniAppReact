@@ -34,6 +34,54 @@ class Menu extends Component {
       ];
       lista = studentList;
     }
+    if (usuario.professor!==null) {
+      let professorList = [
+        (<li className="nav-item" key="p-materias-a-cargo">
+          <Link className="nav-link" to="/materias-a-cargo">
+            Materias a Cargo
+          </Link>
+        </li>),
+        (<li className="nav-item" key="p-perfil">
+          <Link className="nav-link" to={`/profesor/${usuario.professor.id}`}>
+            Datos Profesor
+          </Link>
+        </li>)
+      ];
+      lista = [...lista, ...professorList];
+    }
+    if (usuario.administrator!==null) {
+      let administratorList = [
+        (
+          <li className="nav-item dropdown" key="a-agregar-menu">
+            <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Agregar
+            </a>
+            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+              <Link className="dropdown-item" to="/cargar-materia">
+                Materia
+              </Link>
+              <Link className="dropdown-item" to="/cargar-profesor">
+                Profesor
+              </Link>
+              <Link className="dropdown-item" to="/cargar-alumno">
+                Profesor
+              </Link>
+            </div>
+          </li>
+        ),
+        (<li className="nav-item" key="a-revisar-notas">
+          <Link className="nav-link" to="/por-aprobar">
+            Revisar Notas
+          </Link>
+        </li>),
+        (<li className="nav-item" key="a-cargar-notas">
+          <Link className="nav-link" to="/materias-a-cargo">
+            Cargar Notas
+          </Link>
+        </li>)
+      ];
+      lista = [...lista, ...administratorList];
+    }
     return lista;
   }
 
@@ -51,8 +99,14 @@ class Menu extends Component {
       <section id="menu">
         <NotificationContainer />
 
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <Link className="navbar-brand" to="/">FIUNI APP</Link>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-red-fiuni">
+          <Link className="navbar-brand" to="/">
+            <img src="/assets/images/logo.png"
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+              alt="" /> FIUNI APP
+          </Link>
             <button
               className="navbar-toggler"
               type="button"
@@ -64,10 +118,15 @@ class Menu extends Component {
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarText">
-              <ul className="navbar-nav mr-auto">
+              <ul className="navbar-nav ml-auto">
                 {this.renderMenuItems()}
                 <li className="nav-item">
-                  <a className="nav-link" onClick={this.props.cerrarSesion}>Cerrar Sesión</a>
+                  <Link
+                    className="nav-link"
+                    to="/login"
+                    onClick={this.props.cerrarSesion}>
+                    Cerrar Sesión
+                  </Link>
                 </li>
               </ul>
             </div>
