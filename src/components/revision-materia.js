@@ -7,6 +7,8 @@ export default class RevisionMateria extends Component {
     this.state = {
       notas: {}
     }
+
+    this.onChangeHandler = this.onChangeHandler.bind(this);
   }
   inputChange(value, student){
     let notas = JSON.parse(JSON.stringify(this.state.notas));
@@ -38,6 +40,12 @@ export default class RevisionMateria extends Component {
     }
   }
 
+  onChangeHandler(idnota, value){
+    let notas = JSON.parse(JSON.stringify(this.state.notas));
+    notas[idnota]= value;
+    this.setState({ notas });
+  }
+
   renderNotas(notes){
     if (notes===null) {
       return (<tr><td  colSpan="3">Cargando</td></tr>);
@@ -48,62 +56,32 @@ export default class RevisionMateria extends Component {
           <td>{note.student.person.ci}</td>
           <td>{note.student.person.names}</td>
           <td>
-
             <div className="form-check form-check-inline">
               <input
                 className="form-check-input"
                 type="radio"
-                name={`aca-${note.student.person.ci}`}
-                checked={this.getInputValue(note.student.id, 0)===1}
-                onChange={(evt)=>this.inputChange(10, note.student.id)}/>
+                name={`aca-${note.id}`}
+                checked={this.state.notas[note.id]===1}
+                onChange={()=>this.onChangeHandler(note.id, 1)}/>
                 <label className="form-check-label" htmlFor={`aca-${note.student.person.ci}`}>Si</label>
             </div>
             <div className="form-check form-check-inline">
               <input
                 className="form-check-input"
                 type="radio"
-                name={`aca-${note.student.person.ci}`}
-                checked={this.getInputValue(note.student.id, 0)===2}
-                onChange={(evt)=>this.inputChange(20, note.student.id)} />
+                name={`aca-${note.id}`}
+                checked={this.state.notas[note.id]===2}
+                onChange={()=>this.onChangeHandler(note.id, 2)} />
                 <label className="form-check-label" htmlFor={`aca-${note.student.person.ci}`}>No</label>
-            </div>
-            <div className="form-check form-check-inline" hidden>
-              <input
-                className="form-check-input"
-                type="radio"
-                checked={this.getInputValue(note.student.id, 0)===0}
-                name={`aca-${note.student.person.ci}`}
-                onChange={(evt)=>this.inputChange(0, note.student.id)} />
-                <label className="form-check-label" htmlFor={`aca-${note.student.person.ci}`}>Sin revisar</label>
-            </div>
-          </td>
-          <td>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-                type="radio"
-                name={`sec-${note.student.person.ci}`}
-                checked={this.getInputValue(note.student.id, 1)===1}
-                onChange={(evt)=>this.inputChange(1, note.student.id)} />
-                <label className="form-check-label" htmlFor={`aca-${note.student.person.ci}`}>Si</label>
             </div>
             <div className="form-check form-check-inline">
               <input
                 className="form-check-input"
                 type="radio"
-                name={`sec-${note.student.person.ci}`}
-                checked={this.getInputValue(note.student.id, 1)===2}
-                onChange={(evt)=>this.inputChange(2, note.student.id)} />
-                <label className="form-check-label" htmlFor={`aca-${note.student.person.ci}`}>No</label>
-            </div>
-            <div className="form-check form-check-inline" hidden>
-              <input
-                className="form-check-input"
+                checked={this.state.notas[note.id]===0}
+                name={`aca-${note.id}`}
                 value="0"
-                type="radio"
-                checked={this.getInputValue(note.student.id, 1)===0}
-                name={`sec-${note.student.person.ci}`}
-                onChange={(evt)=>this.inputChange(0, note.student.id)} />
+                onChange={()=>this.onChangeHandler(note.id, 0)} />
                 <label className="form-check-label" htmlFor={`aca-${note.student.person.ci}`}>Sin revisar</label>
             </div>
           </td>
@@ -128,7 +106,6 @@ export default class RevisionMateria extends Component {
                 <th scope="col">CI</th>
                 <th scope="col">Nombre</th>
                 <th>Académico</th>
-                <th>Secretaría</th>
               </tr>
             </thead>
             <tbody>
