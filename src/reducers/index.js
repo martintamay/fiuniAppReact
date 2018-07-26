@@ -9,6 +9,7 @@ import notasReducer from './notas-reducer';
 import usuarioReducer from './usuario-reducer';
 import alumnoReducer from './alumno-reducer';
 import alumnosParaCargaReducer from './alumnos-para-carga-reducer';
+import listaNotasMateriaReducer from './notas-materias-reducer';
 
 
 const rootReducer = combineReducers(
@@ -21,7 +22,8 @@ const rootReducer = combineReducers(
     materiasCursandose: materiasCursandoseReducer,
     materiasACargo: materiasACargoReducer,
     alumnosParaCargar: alumnosParaCargaReducer,
-    alumno: alumnoReducer
+    alumno: alumnoReducer,
+    listaNotasMateria: listaNotasMateriaReducer
   }
 );
 

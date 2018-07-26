@@ -13,6 +13,7 @@ export const GET_MATERIAS_CURSANDOSE = "GET_MATERIAS_CURSANDOSE";
 export const GET_MATERIAS_A_CARGO = "GET_MATERIAS_A_CARGO";
 export const GET_ALUMNOS_PARA_CARGA = "GET_ALUMNOS_PARA_CARGA";
 export const ALUMNO_REQ = "ALUMNO_REQ";
+export const NOTAS_MATERIAS = "NOTAS_MATERIAS";
 
 function setSessionStorage(mantener){
   if(mantener===true){
@@ -22,6 +23,44 @@ function setSessionStorage(mantener){
     sessionStorage.setItem("session_token", "true");
     localStorage.removeItem("session_token");
   }
+}
+export function notasMateria(idmateria){
+  let req=axios.get(`${SERVER}/subjects/${idmateria}/notes`);
+  return {
+    type: NOTAS_MATERIAS,
+    payload:{data:{
+      notes: {
+        students:[
+          {
+            id:1,
+            person: {
+              names: "dffds",
+              ci: 3543596
+            },
+            note: [
+              {
+                id:1,
+                opportunity: 1,
+                noteType: "PP",
+                percentage: 70,
+                score: null
+              },
+              {
+                id:1,
+                opportunity: 1,
+                noteType: "Final",
+                percentage: 70,
+                score: 4
+              }
+            ]
+          }
+        ]}
+    }
+    }
+  }
+//  return {
+//    type: NOTAS_MATERIAS, payload:req
+//  };
 }
 
 export function loguear(correo, contrasenha, mantener=false){

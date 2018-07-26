@@ -8,11 +8,16 @@ export default class RevisionMateria extends Component {
       notas: {}
     }
 
+<<<<<<< HEAD
     this.onChangeHandler = this.onChangeHandler.bind(this);
+=======
+    this.guardar = this.guardar.bind(this);
+>>>>>>> 76036a790a285bd38c5d55000d0c248cbc1a078b
   }
   inputChange(value, student){
     let notas = JSON.parse(JSON.stringify(this.state.notas));
-    if (notas[student]===undefined) {
+    notas[student]=value;
+    /*if (notas[student]===undefined) {
       notas[student] = 0;
     }
     if (value>=10) {
@@ -20,10 +25,11 @@ export default class RevisionMateria extends Component {
     }else{
       notas[student] = Math.floor(notas[student]/10)*10;
     }
-    notas[student] = notas[student]+value;
+    notas[student] = notas[student]+value;*/
     this.setState({ notas });
   }
 
+<<<<<<< HEAD
   /**
   * type 1 = secretaría y type 0 = académico
   */
@@ -46,6 +52,8 @@ export default class RevisionMateria extends Component {
     this.setState({ notas });
   }
 
+=======
+>>>>>>> 76036a790a285bd38c5d55000d0c248cbc1a078b
   renderNotas(notes){
     if (notes===null) {
       return (<tr><td  colSpan="3">Cargando</td></tr>);
@@ -60,28 +68,46 @@ export default class RevisionMateria extends Component {
               <input
                 className="form-check-input"
                 type="radio"
+<<<<<<< HEAD
                 name={`aca-${note.id}`}
                 checked={this.state.notas[note.id]===1}
                 onChange={()=>this.onChangeHandler(note.id, 1)}/>
+=======
+                name={`aca-${note.student.person.ci}`}
+                checked={this.state.notas[note.student.id]===1}
+                onChange={(evt)=>this.inputChange(1, note.student.id)}/>
+>>>>>>> 76036a790a285bd38c5d55000d0c248cbc1a078b
                 <label className="form-check-label" htmlFor={`aca-${note.student.person.ci}`}>Si</label>
             </div>
             <div className="form-check form-check-inline">
               <input
                 className="form-check-input"
                 type="radio"
+<<<<<<< HEAD
                 name={`aca-${note.id}`}
                 checked={this.state.notas[note.id]===2}
                 onChange={()=>this.onChangeHandler(note.id, 2)} />
+=======
+                name={`aca-${note.student.person.ci}`}
+                checked={this.state.notas[note.student.id]===2}
+                onChange={(evt)=>this.inputChange(2, note.student.id)} />
+>>>>>>> 76036a790a285bd38c5d55000d0c248cbc1a078b
                 <label className="form-check-label" htmlFor={`aca-${note.student.person.ci}`}>No</label>
             </div>
             <div className="form-check form-check-inline">
               <input
                 className="form-check-input"
                 type="radio"
+<<<<<<< HEAD
                 checked={this.state.notas[note.id]===0}
                 name={`aca-${note.id}`}
                 value="0"
                 onChange={()=>this.onChangeHandler(note.id, 0)} />
+=======
+                checked={this.state.notas[note.student.id]===undefined || this.state.notas[note.student.id]===0}
+                name={`aca-${note.student.person.ci}`}
+                onChange={(evt)=>this.inputChange(0, note.student.id)} />
+>>>>>>> 76036a790a285bd38c5d55000d0c248cbc1a078b
                 <label className="form-check-label" htmlFor={`aca-${note.student.person.ci}`}>Sin revisar</label>
             </div>
           </td>
@@ -91,7 +117,7 @@ export default class RevisionMateria extends Component {
   }
 
   guardar(){
-
+    console.log("notas revisadas de materia", this.state.notas);
   }
 
   render(){
@@ -105,7 +131,11 @@ export default class RevisionMateria extends Component {
               <tr>
                 <th scope="col">CI</th>
                 <th scope="col">Nombre</th>
+<<<<<<< HEAD
                 <th>Académico</th>
+=======
+                <th>Aprobado</th>
+>>>>>>> 76036a790a285bd38c5d55000d0c248cbc1a078b
               </tr>
             </thead>
             <tbody>
