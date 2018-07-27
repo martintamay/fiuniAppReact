@@ -5,11 +5,6 @@ import { connect } from 'react-redux';
 
 class MateriasCursandose extends Component {
   componentDidMount(){
-    /*if(this.props.usuario===null || this.props.usuario===undefined){
-      if(localStorage.getItem("session_token")!=null){
-        this.props.recuperarLogueo(localStorage.getItem("session_token"));
-      }
-    }*/
     this.props.getMateriasCursandose(this.props.match.params.user_id);
   }
 

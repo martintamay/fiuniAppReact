@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ReduxPromise from 'redux-promise';
+import LoadingBar, { loadingBarMiddleware } from 'react-redux-loading-bar';
 import isMobile from 'is-mobile';
 
 import reducers from './reducers';
@@ -29,7 +30,8 @@ if (!develop && window.location.protocol !== 'https:') {
   else window.location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
 }
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise, loadingBarMiddleware())(createStore);
+
 
 if(isMobile()){
   function SinImplementar(props){
@@ -62,12 +64,14 @@ if(isMobile()){
       <BrowserRouter>
         <div className="super-container">
           <Route path="/" component={Menu} />
+          <Route path="/" component={LoadingBar} />
+
           <Switch>
             <Route path="/alumno/:idalumno" component={CargarAlumno} />
             <Route path="/notas" component={Notas} />
             <Route path="/materias/:materia_id/cargar-notas" component={CargaNotas} />
             <Route path="/materias-a-cargo" component={MateriasACargo} />
-            <Route path="/materias" component={MateriasCursandose} />
+            <Route path="/materias/:user_id" component={MateriasCursandose} />
             <Route path="/por-aprobar" component={NotasPorAprobar} />
             <Route path="/cargar-materia" component={CargarMateria} />
             <Route path="/cargar-profesor" component={CargarProfesor} />

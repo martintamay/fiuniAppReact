@@ -1,38 +1,51 @@
 import React, { Component } from 'react';
-import { getNotasPorAprobar } from '../actions';
+import { getExamenesPorAprobar, getExamenes, getMaterias } from '../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import RevisionMateria from '../components/revision-materia';
+import '../assets/toggle-switch.css';
 
-class NotasPorAprobar extends Component {
+class examenesPorAprobar extends Component {
   constructor(props){
     super(props);
 
     this.state = {
-      notasCorrigiendose: null
+      notasCorrigiendose: null,
+      onlyUncheckeds: true
     }
 
     this.guardar = this.guardar.bind(this);
+    this.renderNotas = this.renderNotas.bind(this);
+    this.onlyUncheckedsChange = this.onlyUncheckedsChange.bind(this);
   }
 
   componentDidMount(){
-    this.props.getNotasPorAprobar();
+    if(this.props.materias===null){
+      this.props.getMaterias();
+    }
+    this.props.getExamenesPorAprobar();
   }
 
   guardar(notes){
-    console.log(notes);
+    let notasOrdenadas = [];
+    for (var id in notes) {
+      if (notes.hasOwnProperty(id)) {
+        notasOrdenadas.push({ id, checked: notes[id] });
+      }
+    }
+    console.log(notasOrdenadas);
   }
 
   renderNotas(notes){
-    if(notes === null){
+    if(notes === null || this.props.materias === null){
       return (<tr><td colSpan="3">Cargando...</td></tr>);
     }
     return notes.map((note)=>{
       return (
-        <tr key={`npa-${note.subject.id}-${note.takenDate}`}>
-          <td>{note.subject.name}</td>
-          <td>{note.takenDate}</td>
+        <tr key={`npa-${note.subject.id}-${note.examination_date}`}>
+          <td>{note.examination_date}</td>
+          <td>{this.props.materias[note.subject.id].name}</td>
           <td>
             <button
               className="btn btn-secondary"
@@ -43,6 +56,15 @@ class NotasPorAprobar extends Component {
         </tr>
       );
     });
+  }
+
+  onlyUncheckedsChange(evt){
+    if (evt.target.checked===true) {
+      this.props.getExamenesPorAprobar();
+    }else{
+      this.props.getExamenes();
+    }
+    this.setState({ onlyUncheckeds: evt.target.checked });
   }
 
   render(){
@@ -57,18 +79,37 @@ class NotasPorAprobar extends Component {
     return (
       <section id="notas-por-aprobar">
         <div className="container card">
-          <h1>Notas por aprobar</h1>
+          <div className="row">
+            <div className="col">
+              <h1>Notas por aprobar</h1>
+            </div>
+            <div className="col">
+              <div className="form-group float-right">
+                <span>Solo con Pendientes</span>
+                <div className="switch">
+                  <input
+                    id="cmn-toggle-4"
+                    className="cmn-toggle cmn-toggle-round-flat"
+                    type="checkbox"
+                    checked={this.state.onlyUncheckeds}
+                    onChange={this.onlyUncheckedsChange}/>
+                  <label htmlFor="cmn-toggle-4"></label>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <hr />
           <table className="table table-striped table-bordered tabla-notas">
             <thead>
               <tr>
-                <th scope="col">Nombre</th>
                 <th scope="col">Fecha</th>
+                <th scope="col">Nombre</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              {this.renderNotas(this.props.notasPorAprobar)}
+              {this.renderNotas(this.props.examenesPorAprobar)}
             </tbody>
           </table>
         </div>
@@ -77,14 +118,16 @@ class NotasPorAprobar extends Component {
   }
 }
 
-function mapStateToProps({ usuario, notasPorAprobar }) {
-  return { usuario, notasPorAprobar };
+function mapStateToProps({ usuario, examenesPorAprobar, materias }) {
+  return { usuario, examenesPorAprobar, materias };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    getNotasPorAprobar: getNotasPorAprobar
+    getExamenesPorAprobar: getExamenesPorAprobar,
+    getExamenes: getExamenes,
+    getMaterias: getMaterias
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NotasPorAprobar);
+export default connect(mapStateToProps, mapDispatchToProps)(examenesPorAprobar);
