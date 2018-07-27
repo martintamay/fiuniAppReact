@@ -13,12 +13,36 @@ export default class RevisionMateria extends Component {
       notas
     }
 
+
+    this.onChangeHandler = this.onChangeHandler.bind(this);
     this.guardar = this.guardar.bind(this);
   }
   inputChange(value, note_id){
     let notas = JSON.parse(JSON.stringify(this.state.notas));
     notas[note_id]=value;
 
+    this.setState({ notas });
+  }
+
+  /**
+  * type 1 = secretaría y type 0 = académico
+  */
+  getInputValue(student, type){
+    let check = this.state.notas[student];
+    if (check===undefined) {
+      return 0;
+    }else{
+      if (type===0) {
+        return Math.floor(check/10);
+      }else{
+        return check%10;
+      }
+    }
+  }
+
+  onChangeHandler(idnota, value){
+    let notas = JSON.parse(JSON.stringify(this.state.notas));
+    notas[idnota]= value;
     this.setState({ notas });
   }
 
