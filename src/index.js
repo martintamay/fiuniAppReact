@@ -21,7 +21,10 @@ import Login from './containers/login';
 import CargarAlumno from './containers/cargar-alumno';
 import CargarMateria from './containers/cargar-materia';
 import CargarProfesor from './containers/cargar-profesor';
-import listaNotasMaterias from './containers/lista-notas';
+import ListaNotasMaterias from './containers/lista-notas';
+import ListarMaterias from './containers/listar-materias';
+import ListarCarreras from './containers/listar-carreras';
+import ListarProfesores from './containers/listar-profesores';
 
 export const develop = window.location.hostname==="localhost";
 
@@ -71,10 +74,14 @@ if(isMobile()){
             <Route path="/alumno/:idalumno" component={CargarAlumno} />
             <Route path="/notas" component={Notas} />
             <Route path="/materias/:materia_id/cargar-notas" component={CargaNotas} />
-            <Route path="/materias/:materia_id/notas" component={listaNotasMaterias} />
+            <Route path="/materias/:materia_id/notas" component={ListaNotasMaterias} />
             <Route path="/materias-a-cargo" component={MateriasACargo} />
             <Route path="/materias/:user_id" component={MateriasCursandose} />
+            <Route path="/materias" component={ListarMaterias} />
+            <Route path="/carreras" component={ListarCarreras} />
+            <Route path="/profesores" component={ListarProfesores} />
             <Route path="/por-aprobar" component={NotasPorAprobar} />
+            <Route path="/editar-materia/:materia_id" component={CargarMateria} />
             <Route path="/cargar-materia" component={CargarMateria} />
             <Route path="/cargar-profesor" component={CargarProfesor} />
             <Route path="/profesor/:idprofesor" component={CargarProfesor} />

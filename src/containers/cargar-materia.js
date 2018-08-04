@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getCarreras } from '../actions';
+import { getCarreras, agregarMateria } from '../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -64,13 +64,14 @@ class CargarMateria extends Component {
   onSubmit(event){
     event.preventDefault();
     if(this.comprobarCampos()){
-      console.log("materia", {
+      let datos = {
         subject: {
           name: this.state.nombre,
           semester: this.state.semestre,
           career_id: this.state.carrera
         }
-      });
+      };
+      this.props.agregarMateria(datos)
     }
   }
 
@@ -148,7 +149,8 @@ function mapStateToProps({ carreras }) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    getCarreras: getCarreras
+    getCarreras: getCarreras,
+    agregarMateria: agregarMateria
   }, dispatch)
 }
 

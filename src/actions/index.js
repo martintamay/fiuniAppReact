@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const SERVER = "https://fiuni-app.herokuapp.com/api";
-//const SERVER = "http://localhost:3000/api";
+//const SERVER = "https://fiuni-app.herokuapp.com/api";
+const SERVER = "http://localhost:3000/api";
 
 export const ERRLOGIN = "ERRLOGIN";
 export const LOGIN_REQ = "LOGIN_REQ";
@@ -16,15 +16,15 @@ export const GET_ALUMNOS_PARA_CARGA = "GET_ALUMNOS_PARA_CARGA";
 export const ALUMNO_REQ = "ALUMNO_REQ";
 export const NOTAS_MATERIAS = "NOTAS_MATERIAS";
 export const NOTES_CHECK = "NOTES_CHECK";
+export const CARGA_MATERIA = "CARGA_MATERIA";
+export const PROFESORES_REQ = "PROFESORES_REQ";
 
-function setSessionStorage(mantener){
-  if(mantener===true){
-    localStorage.setItem("session_token", "true");
-    sessionStorage.removeItem("session_token");
-  } else {
-    sessionStorage.setItem("session_token", "true");
-    localStorage.removeItem("session_token");
-  }
+export function agregarMateria(datos){
+  let req = axios.post(`${SERVER}/susbjects`, datos);
+  return {
+    type: CARGA_MATERIA,
+    payload: req
+  };
 }
 
 export function enviarNotasRevisadas(notas){
@@ -184,6 +184,14 @@ export function getMaterias(idalumno=null){
   };
 }
 
+export function getProfesores(){
+  let req = axios.get(`${SERVER}/professors`);
+  return {
+    type: PROFESORES_REQ,
+    payload: req
+  };
+}
+
 export function getNotas(idalumno){
   return {
     type: GET_NOTAS,
@@ -249,4 +257,15 @@ export function getExamenes(){
     type: GET_EXAMENES,
     payload: req
   };
+}
+
+
+function setSessionStorage(mantener){
+  if(mantener===true){
+    localStorage.setItem("session_token", "true");
+    sessionStorage.removeItem("session_token");
+  } else {
+    sessionStorage.setItem("session_token", "true");
+    localStorage.removeItem("session_token");
+  }
 }

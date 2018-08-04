@@ -115,12 +115,6 @@ class CargaNotas extends Component {
   }
 
   render(){
-    if (false && this.props.alumnosParaCargar!==null) {
-      console.log("state", this.state);
-      console.log("alumnos para carga", this.props.alumnosParaCargar);
-    }
-
-
     if(!this.state.datosExamen){
       return this.renderDatosExamen();
     }

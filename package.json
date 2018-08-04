@@ -4,8 +4,10 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "informed": "^1.8.1",
     "is-mobile": "^1.0.0",
     "react": "^16.4.1",
+    "react-bootstrap-table-next": "^1.0.0",
     "react-dom": "^16.4.1",
     "react-notifications": "^1.4.3",
     "react-redux": "^5.0.7",
