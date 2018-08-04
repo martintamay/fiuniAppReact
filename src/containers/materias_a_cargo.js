@@ -20,7 +20,7 @@ class MateriasACargo extends Component {
       return (
         <Link className="list-group-item list-group-item-action"
           key={materia.id}
-          to={`/materias/${materia.id}/cargar-notas`} >
+          to={`/materias/${materia.id}/notas`} >
           {materia.name}
         </Link>
       );

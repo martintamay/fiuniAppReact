@@ -79,6 +79,7 @@ class ListaNotas extends Component {
     {this.renderAlumno()}
   </tbody>
 </table>
+<a classBame="btn btn-primary ml-auto" href="#" role="button">Volver</a>
         </div>
       </section>
     );
