@@ -5,7 +5,7 @@ export default function(state=null, action){
     case GET_MATERIAS:
       let materias = {};
 
-      action.payload.forEach((materia)=>{
+      action.payload.data.forEach((materia)=>{
         materias[materia.id] = materia;
       });
       return materias;

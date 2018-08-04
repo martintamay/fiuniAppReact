@@ -29,7 +29,7 @@ class Menu extends Component {
           <Link className="nav-link" to={`/alumno/${usuario.student.id}`}>Perfil </Link>
         </li>),
         (<li className="nav-item" key="s-materias">
-          <Link className="nav-link" to="/materias">Materias </Link>
+          <Link className="nav-link" to={`/materias/${usuario.student.id}`}>Materias </Link>
         </li>)
       ];
       lista = studentList;
@@ -107,29 +107,29 @@ class Menu extends Component {
               className="d-inline-block align-top"
               alt="" /> FIUNI APP
           </Link>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarText"
-              aria-controls="navbarText"
-              aria-expanded="false"
-              aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarText">
-              <ul className="navbar-nav ml-auto">
-                {this.renderMenuItems()}
-                <li className="nav-item">
-                  <Link
-                    className="nav-link"
-                    to="/login"
-                    onClick={this.props.cerrarSesion}>
-                    Cerrar Sesión
-                  </Link>
-                </li>
-              </ul>
-            </div>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarText"
+            aria-controls="navbarText"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarText">
+            <ul className="navbar-nav ml-auto">
+              {this.renderMenuItems()}
+              <li className="nav-item">
+                <Link
+                  className="nav-link"
+                  to="/login"
+                  onClick={this.props.cerrarSesion}>
+                  Cerrar Sesión
+                </Link>
+              </li>
+            </ul>
+          </div>
         </nav>
       </section>
     );

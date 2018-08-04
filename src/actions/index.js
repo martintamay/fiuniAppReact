@@ -1,7 +1,12 @@
 import axios from 'axios';
 
+<<<<<<< HEAD
 //const SERVER = "https://fiuni-app.herokuapp.com/api";
 const SERVER = "http://localhost:3000/api";
+=======
+const SERVER = "https://fiuni-app.herokuapp.com/api";
+//const SERVER = "http://localhost:3000/api";
+>>>>>>> 280b200a569aa5593c35efa9073e00ea9bd357ff
 
 export const ERRLOGIN = "ERRLOGIN";
 export const LOGIN_REQ = "LOGIN_REQ";
@@ -9,12 +14,13 @@ export const RELOGIN_REQ = "RELOGIN_REQ";
 export const GET_NOTAS = "GET_NOTAS";
 export const GET_MATERIAS = "GET_MATERIAS";
 export const GET_CARRERAS = "GET_CARRERAS";
-export const GET_NOTAS_POR_APROBAR = "GET_NOTAS_POR_APROBAR";
+export const GET_EXAMENES = "GET_EXAMENES";
 export const GET_MATERIAS_CURSANDOSE = "GET_MATERIAS_CURSANDOSE";
 export const GET_MATERIAS_A_CARGO = "GET_MATERIAS_A_CARGO";
 export const GET_ALUMNOS_PARA_CARGA = "GET_ALUMNOS_PARA_CARGA";
 export const ALUMNO_REQ = "ALUMNO_REQ";
 export const NOTAS_MATERIAS = "NOTAS_MATERIAS";
+export const NOTES_CHECK = "NOTES_CHECK";
 
 function setSessionStorage(mantener){
   if(mantener===true){
@@ -25,43 +31,21 @@ function setSessionStorage(mantener){
     localStorage.removeItem("session_token");
   }
 }
-export function notasMateria(idmateria){
-  let req=axios.get(`${SERVER}/subjects/${idmateria}/notes`);
+
+export function enviarNotasRevisadas(notas){
+  let req = axios.put(`${SERVER}/notes/bulk-check`, {
+    notes: notas
+  });
   return {
-    type: NOTAS_MATERIAS,
-    payload:{data:{
-      notes: {
-        students:[
-          {
-            id:1,
-            person: {
-              names: "dffds",
-              ci: 3543596
-            },
-            note: [
-              {
-                id:1,
-                opportunity: 1,
-                noteType: "PP",
-                percentage: 70,
-                score: null
-              },
-              {
-                id:1,
-                opportunity: 1,
-                noteType: "Final",
-                percentage: 70,
-                score: 4
-              }
-            ]
-          }
-        ]}
-    }
-    }
+    type: NOTES_CHECK,
+    payload: req
   }
-//  return {
-//    type: NOTAS_MATERIAS, payload:req
-//  };
+}
+export function notasMateria(idmateria){
+  let req = axios.get(`${SERVER}/subjects/${idmateria}/notes`);
+  return {
+    type: NOTAS_MATERIAS, payload:req
+  };
 }
 
 export function loguear(correo, contrasenha, mantener=false){
@@ -130,10 +114,6 @@ export function reloguin(){
   };
 }
 
-export function enviarAprobados(notes){
-  console.log(notes);
-}
-
 export function getAlumnosParaCargar(idmateria){
   return {
     type: GET_ALUMNOS_PARA_CARGA,
@@ -195,21 +175,17 @@ export function getMateriasCursandose(idalumno){
   };
 }
 
-export function getMaterias(idalumno){
+export function getMaterias(idalumno=null){
+  let req = null;
+  if(idalumno){
+    req = axios.get(`${SERVER}/student/${idalumno}/subjects`);
+
+  }else{
+    req = axios.get(`${SERVER}/subjects`);
+  }
   return {
     type: GET_MATERIAS,
-    payload: [
-      {
-        "id": 1,
-        "name": "Física 1",
-        "semester": 1
-      },
-      {
-        "id": 2,
-        "name": "Análisis 1",
-        "semester": 1
-      }
-    ]
+    payload: req
   };
 }
 
@@ -265,84 +241,17 @@ export function getNotas(idalumno){
   };
 }
 
-export function getNotasPorAprobar(){
+export function getExamenesPorAprobar(){
+  let req = axios.get(`${SERVER}/examinations/uncheckeds`);
   return {
-    type: GET_NOTAS_POR_APROBAR,
-    payload:[
-      {
-        takenDate: "2018-05-11",
-        subject: {
-          id: 1,
-          name: "Física I"
-        },
-        notes: [
-          {
-            id: 1,
-            noteType: "FINAL",
-            score: 4,
-            percentage: 85,
-            opportunity: 1,
-            student: {
-              id: 1,
-              person: {
-                names: "Martín Tamay",
-                ci: "4315943"
-              }
-            }
-          },
-          {
-            id: 2,
-            noteType: "FINAL",
-            score: 4,
-            percentage: 85,
-            opportunity: 2,
-            student: {
-              id: 2,
-              person: {
-                names: "Frijolito",
-                ci: "5486578"
-              }
-            }
-          }
-        ]
-      },
-      {
-        takenDate: "2018-05-11",
-        subject: {
-          id: 2,
-          name: "Análisis I"
-        },
-        notes: [
-          {
-            id: 1,
-            noteType: "FINAL",
-            score: 4,
-            percentage: 85,
-            opportunity: 1,
-            student: {
-              id: 1,
-              person: {
-                names: "Martín Tamay",
-                ci: "4315943"
-              }
-            }
-          },
-          {
-            id: 2,
-            noteType: "FINAL",
-            score: 4,
-            percentage: 85,
-            opportunity: 2,
-            student: {
-              id: 2,
-              person: {
-                names: "Frijolito",
-                ci: "5486578"
-              }
-            }
-          }
-        ]
-      }
-    ]
+    type: GET_EXAMENES,
+    payload: req
+  };
+}
+export function getExamenes(){
+  let req = axios.get(`${SERVER}/examinations`);
+  return {
+    type: GET_EXAMENES,
+    payload: req
   };
 }
