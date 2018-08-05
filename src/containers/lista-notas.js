@@ -63,23 +63,23 @@ class ListaNotas extends Component {
 
           <hr/>
           <table className="table table-bordered">
-  <thead>
-    <tr>
-      <th scope="col">CI</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">PP1</th>
-      <th scope="col">PP2</th>
-      <th scope="col">PP3</th>
-      <th scope="col">Final1</th>
-      <th scope="col">Final2</th>
-      <th scope="col">Final3</th>
-    </tr>
-  </thead>
-  <tbody>
-    {this.renderAlumno()}
-  </tbody>
-</table>
-<a classBame="btn btn-primary ml-auto" href="#" role="button">Volver</a>
+            <thead>
+              <tr>
+                <th scope="col">CI</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">PP1</th>
+                <th scope="col">PP2</th>
+                <th scope="col">PP3</th>
+                <th scope="col">Final1</th>
+                <th scope="col">Final2</th>
+                <th scope="col">Final3</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.renderAlumno()}
+            </tbody>
+          </table>
+          <a classBame="btn btn-primary ml-auto" role="button">Volver</a>
         </div>
       </section>
     );

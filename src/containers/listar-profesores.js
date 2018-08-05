@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { getProfesores } from '../actions';
+import GridProfesores from '../grids/grid-profesores';
 
 class ListarProfesores extends Component {
   constructor(props){
@@ -49,20 +50,7 @@ class ListarProfesores extends Component {
         <div className="container card">
           <h2>Lista de Profesores</h2>
           <hr />
-          <table className="table table-bordered">
-            <thead className="thead-dark">
-              <tr>
-                <th scope="col">#ID</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">CI</th>
-                <th scope="col">Correo</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.renderProfesores()}
-            </tbody>
-          </table>
+          <GridProfesores />
           <div className="btn-group ml-auto">
             <Link className="btn btn-primary"
               to="cargar-profesor">

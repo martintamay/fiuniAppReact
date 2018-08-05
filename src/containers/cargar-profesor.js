@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { loguear } from '../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { NotificationManager } from 'react-notifications';
 import FormProfesor from '../forms/form-profesor';
 
 class CargarProfesor extends Component {

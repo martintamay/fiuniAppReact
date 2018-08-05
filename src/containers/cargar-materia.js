@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { getCarreras, agregarMateria } from '../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { NotificationManager } from 'react-notifications';
+import FormMateria from '../forms/form-materia';
 
 class CargarMateria extends Component {
   constructor(props){
@@ -75,69 +75,14 @@ class CargarMateria extends Component {
     }
   }
 
-  renderCarreras(){
-    let carreras = this.props.carreras;
-    if (carreras === null) {
-      return <option value="0" key="carr0">Cargando carreras...</option>;
-    }
-
-    const sinEsp = <option value="0" key="carr0">Elija una carrera</option>;
-    let opCarreras = Object.keys(carreras).map(function(id, index) {
-      return (
-        <option
-          key={id}
-          value={id}>
-          {carreras[id].description}
-        </option>
-      );
-    });
-    return [sinEsp, ...opCarreras];
-  }
-
   render(){
     return (
       <section id="carga-materia">
-        <form onSubmit={this.onSubmit}>
           <div className="container card">
             <h1>Nueva Materia</h1>
             <hr />
-            <div className="row">
-              <div className="col">
-                <label htmlFor="inputNombre" className="col-sm-2 ">Nombre</label>
-                <input type="text"
-                  name="nombre"
-                  className="form-control"
-                  id="inputNombre"
-                  placeholder="nombre"
-                  value={this.state.nombre}
-                  onChange={this.onChangeHandler} />
-
-                <label htmlFor="Carrera" className="col-sm-2">Carrera</label>
-                <select className="form-control"
-                  name="carrera"
-                  id="carrera"
-                  value={this.state.carrera}
-                  onChange={this.onChangeHandler}>
-                  {this.renderCarreras()}
-                </select>
-
-                <label htmlFor="inputSemestre" className="col-sm-2 ">Semestre</label>
-                <input type="number"
-                  className="form-control"
-                  name="semestre"
-                  id="inputSemestre"
-                  placeholder="semestre"
-                  value={this.state.semestre}
-                  onChange={this.onChangeHandler} />
-              </div>
-            </div>
-            <hr />
-            <div className="float-right ml-auto">
-              <button className="btn btn-primary">Guardar</button>
-              <Link className="btn btn-secondary" to="/materias">Cancelar</Link>
-            </div>
+            <FormMateria onSubmit={this.onSubmit}/>
           </div>
-        </form>
       </section>
     );
   }
