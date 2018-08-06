@@ -26,7 +26,7 @@ class Menu extends Component {
           <Link className="nav-link" to="/notas">Notas </Link>
         </li>),
         (<li className="nav-item" key="s-perfil">
-          <Link className="nav-link" to={`/alumno/${usuario.student.id}`}>Perfil </Link>
+          <Link className="nav-link" to={`/estudiante/${usuario.student.id}`}>Perfil </Link>
         </li>),
         (<li className="nav-item" key="s-materias">
           <Link className="nav-link" to={`/materias/${usuario.student.id}`}>Materias </Link>
@@ -63,7 +63,7 @@ class Menu extends Component {
               <Link className="dropdown-item" to="/cargar-profesor">
                 Profesor
               </Link>
-              <Link className="dropdown-item" to="/cargar-alumno">
+              <Link className="dropdown-item" to="/cargar-estudiante">
                 Profesor
               </Link>
             </div>

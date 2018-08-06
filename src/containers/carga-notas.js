@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { getMateriasACargo, getAlumnosParaCargar } from '../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import AlumnoCarga from '../components/alumno-carga'
+import AlumnoCarga from '../components/estudiante-carga'
 import { Link } from 'react-router-dom';
 
 class CargaNotas extends Component {
@@ -62,7 +62,7 @@ class CargaNotas extends Component {
   }
 
   renderAlumnos(){
-    let cursadas = this.props.alumnosParaCargar;
+    let cursadas = this.props.estudiantesParaCargar;
     return cursadas.map((cursada)=>{
       return <AlumnoCarga
         cursada={cursada}
@@ -118,7 +118,7 @@ class CargaNotas extends Component {
     if(!this.state.datosExamen){
       return this.renderDatosExamen();
     }
-    if(this.props.alumnosParaCargar===null){
+    if(this.props.estudiantesParaCargar===null){
       return (
         <section id="materias-cursandose">
           <div className="container card">
@@ -196,8 +196,8 @@ class CargaNotas extends Component {
   }
 }
 
-function mapStateToProps({ alumnosParaCargar }) {
-  return { alumnosParaCargar };
+function mapStateToProps({ estudiantesParaCargar }) {
+  return { estudiantesParaCargar };
 }
 
 function mapDispatchToProps(dispatch) {

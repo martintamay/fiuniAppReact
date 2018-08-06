@@ -32,7 +32,7 @@ class ListarMaterias extends Component {
             <td>{carreras[materia.career.id].description}</td>
             <td>{materia.semester}</td>
             <td>
-              <Link className="btn btn-light" to={`/editar-materia/${id}`} >Editar</Link>
+              <Link className="btn btn-light" to={`/materias/${id}/editar`} >Editar</Link>
             </td>
           </tr>
         );

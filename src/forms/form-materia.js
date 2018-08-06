@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 import { Form, Text, Select, Option } from 'informed';
 
-export default class FormProfesor extends Component {
+import { getCarreras } from '../actions';
 
+class FormMateria extends Component {
+  constructor(props){
+    super(props);
+
+    this.getInitialValues = this.getInitialValues.bind(this);
+  }
+
+  componentDidMount(){
+    if(this.props.carreras === null){
+      this.props.getCarreras();
+    }
+  }
 
   renderCarreras(){
     let carreras = this.props.carreras;
@@ -24,17 +38,26 @@ export default class FormProfesor extends Component {
     return [sinEsp, ...opCarreras];
   }
 
+  getInitialValues(){
+    if(this.props.materia !== undefined){
+      return this.props.materia;
+    } else {
+      return { career_id: 1 };
+    }
+  }
+
 
   render(){
     return (
-      <Form autoComplete="nope" onSubmit={this.props.onSubmit}>
+      <Form autoComplete="nope" onSubmit={this.props.onSubmit} initialValues={this.getInitialValues()}>
         <div className="row">
           <div className="col">
             <label htmlFor="inputNombre" className="col-sm-2 ">Nombre</label>
             <Text field="name"
               className="form-control"
               id="inputNombre"
-              placeholder="nombre" />
+              placeholder="nombre"
+              required />
 
             <label htmlFor="Carrera" className="col-sm-2">Carrera</label>
             <Select className="form-control"
@@ -47,7 +70,8 @@ export default class FormProfesor extends Component {
             <Text className="form-control"
               field="semester"
               id="inputSemestre"
-              placeholder="semestre" />
+              placeholder="semestre"
+              required />
           </div>
         </div>
         <hr />
@@ -59,3 +83,15 @@ export default class FormProfesor extends Component {
     );
   }
 }
+
+function mapStateToProps({ carreras }) {
+  return { carreras };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    getCarreras: getCarreras
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormMateria);

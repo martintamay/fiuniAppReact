@@ -1,8 +1,8 @@
-import { GET_MATERIAS } from '../actions';
+import { MATERIAS_REQ } from '../actions';
 
 export default function(state=null, action){
   switch (action.type) {
-    case GET_MATERIAS:
+    case MATERIAS_REQ:
       let materias = {};
 
       action.payload.data.forEach((materia)=>{

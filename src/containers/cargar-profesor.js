@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { loguear } from '../actions';
+import { createProfesor, resetProfesor } from '../actions';
+import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
 import FormProfesor from '../forms/form-profesor';
 
 class CargarProfesor extends Component {
@@ -11,29 +13,19 @@ class CargarProfesor extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  comprobarCampos(){
-    let check = true;
-    if (this.state.nombre==="") {
-      this.error("Introduzca un nombre válido");
-      check = false;
-    } else if (this.state.correo==="") {
-      this.error("Introduzca un correo válido");
-      check = false;
-    } else if (this.state.ci==="") {
-      this.error("Introduzca un ci válido");
-      check = false;
-    } else if (this.state.contrasenha==="") {
-      this.error("Introduzca una contraseña válida");
-      check = false;
-    }
-    return check;
+  componentDidMount(){
+    this.props.resetProfesor();
   }
 
   onSubmit(profesor){
     console.log("profesor", profesor);
+    this.props.createProfesor(profesor);
   }
 
   render(){
+    if(this.props.profesor!==null){
+      return <Redirect to={`/profesores/${this.props.profesor.id}/editar`} />
+    }
     return (
       <section id="carga-profesor">
         <div className="container card">
@@ -47,13 +39,14 @@ class CargarProfesor extends Component {
   }
 }
 
-function mapStateToProps({ usuario }) {
-  return { usuario };
+function mapStateToProps({ profesor }) {
+  return { profesor };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    loguear: loguear
+    createProfesor: createProfesor,
+    resetProfesor: resetProfesor
   }, dispatch)
 }
 

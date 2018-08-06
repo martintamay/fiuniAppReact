@@ -2,45 +2,14 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import { getProfesores } from '../actions';
+import { getProfesores, resetProfesor } from '../actions';
 import GridProfesores from '../grids/grid-profesores';
 
 class ListarProfesores extends Component {
-  constructor(props){
-    super(props);
-
-    this.renderProfesores = this.renderProfesores.bind(this);
-  }
-
   componentDidMount(){
+    this.props.resetProfesor();
     if(this.props.profesores===null){
       this.props.getProfesores();
-    }
-  }
-
-  renderProfesores(){
-    let profesores = this.props.profesores;
-    if (profesores!==null) {
-      return Object.keys(profesores).map(function(id, index) {
-        let profesor = profesores[id].person;
-        return (
-          <tr key={id}>
-            <th scope="row">{id}</th>
-            <td>{profesor.names}</td>
-            <td>{profesores.ci}</td>
-            <td>{profesores.email}</td>
-            <td>
-              <Link className="btn btn-light" to={`/editar-profesor/${id}`} >Editar</Link>
-            </td>
-          </tr>
-        );
-      });
-    } else {
-      return (
-        <tr>
-          <th colSpan="4">Cargando</th>
-        </tr>
-      );
     }
   }
 
@@ -50,13 +19,13 @@ class ListarProfesores extends Component {
         <div className="container card">
           <h2>Lista de Profesores</h2>
           <hr />
-          <GridProfesores />
           <div className="btn-group ml-auto">
             <Link className="btn btn-primary"
-              to="cargar-profesor">
+              to="/profesores/nuevo">
               Agregar
             </Link>
           </div>
+          <GridProfesores />
         </div>
       </section>
     );
@@ -69,7 +38,8 @@ function mapStateToProps({ profesores }) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    getProfesores: getProfesores
+    getProfesores: getProfesores,
+    resetProfesor: resetProfesor
   }, dispatch)
 }
 

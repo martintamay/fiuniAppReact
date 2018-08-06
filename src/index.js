@@ -18,9 +18,14 @@ import MateriasCursandose from './containers/materias_cursandose';
 import MateriasACargo from './containers/materias_a_cargo';
 import CargaNotas from './containers/carga-notas';
 import Login from './containers/login';
-import CargarAlumno from './containers/cargar-alumno';
+import CargarEstudiante from './containers/cargar-estudiante';
+import EditarEstudiante from './containers/editar-estudiante';
 import CargarMateria from './containers/cargar-materia';
+import EditarMateria from './containers/editar-materia';
 import CargarProfesor from './containers/cargar-profesor';
+import EditarProfesor from './containers/editar-profesor';
+import CargarExamen from './containers/cargar-examen';
+import EditarExamen from './containers/editar-examen';
 import ListaNotasMaterias from './containers/lista-notas';
 import ListarMaterias from './containers/listar-materias';
 import ListarCarreras from './containers/listar-carreras';
@@ -71,21 +76,24 @@ if(isMobile()){
           <Route path="/" component={LoadingBar} />
 
           <Switch>
-            <Route path="/alumno/:idalumno" component={CargarAlumno} />
             <Route path="/notas" component={Notas} />
+            <Route path="/estudiantes/nuevo" component={CargarEstudiante} />
+            <Route path="/estudiantes/:estudiante_id/editar" component={EditarEstudiante} />
+            <Route path="/materias-a-cargo" component={MateriasACargo} />
+            <Route path="/materias/nuevo" component={CargarMateria} />
             <Route path="/materias/:materia_id/cargar-notas" component={CargaNotas} />
             <Route path="/materias/:materia_id/notas" component={ListaNotasMaterias} />
-            <Route path="/materias-a-cargo" component={MateriasACargo} />
+            <Route path="/materias/:materia_id/editar" component={EditarMateria} />
             <Route path="/materias/:user_id" component={MateriasCursandose} />
             <Route path="/materias" component={ListarMaterias} />
+            <Route path="/examenes/nuevo" component={CargarExamen} />
+            <Route path="/examenes/:examen_id/editar" component={EditarExamen} />
             <Route path="/carreras" component={ListarCarreras} />
+            <Route path="/profesores/nuevo" component={CargarProfesor} />
+            <Route path="/profesores/:profesor_id/editar" component={EditarProfesor} />
             <Route path="/profesores" component={ListarProfesores} />
             <Route path="/por-aprobar" component={NotasPorAprobar} />
-            <Route path="/editar-materia/:materia_id" component={CargarMateria} />
-            <Route path="/cargar-materia" component={CargarMateria} />
-            <Route path="/cargar-profesor" component={CargarProfesor} />
             <Route path="/profesor/:idprofesor" component={CargarProfesor} />
-            <Route path="/cargar-alumno" component={CargarAlumno} />
             <Route path="/prueba" component={Prueba} />
             <Route path="/login" component={Login} />
           </Switch>

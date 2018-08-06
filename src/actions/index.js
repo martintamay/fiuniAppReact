@@ -7,22 +7,59 @@ export const ERRLOGIN = "ERRLOGIN";
 export const LOGIN_REQ = "LOGIN_REQ";
 export const RELOGIN_REQ = "RELOGIN_REQ";
 export const GET_NOTAS = "GET_NOTAS";
-export const GET_MATERIAS = "GET_MATERIAS";
-export const GET_CARRERAS = "GET_CARRERAS";
-export const GET_EXAMENES = "GET_EXAMENES";
+export const MATERIAS_REQ = "MATERIAS_REQ";
+export const GET_MATERIA = "GET_MATERIA";
+export const UPDATE_MATERIA = "UPDATE_MATERIA";
 export const GET_MATERIAS_CURSANDOSE = "GET_MATERIAS_CURSANDOSE";
 export const GET_MATERIAS_A_CARGO = "GET_MATERIAS_A_CARGO";
-export const GET_ALUMNOS_PARA_CARGA = "GET_ALUMNOS_PARA_CARGA";
-export const ALUMNO_REQ = "ALUMNO_REQ";
+export const GET_CARRERAS = "GET_CARRERAS";
+export const GET_EXAMENES = "GET_EXAMENES";
+export const CREATE_EXAMEN = "CREATE_EXAMEN";
+export const UPDATE_EXAMEN = "UPDATE_EXAMEN";
+export const GET_EXAMEN = "GET_EXAMEN";
+export const GET_ESTUDIANTES_PARA_CARGA = "GET_ESTUDIANTES_PARA_CARGA";
+export const ESTUDIANTE_REQ = "ESTUDIANTE_REQ";
+export const CREATE_ESTUDIANTE = "CREATE_ESTUDIANTE";
+export const UPDATE_ESTUDIANTE = "UPDATE_ESTUDIANTE";
 export const NOTAS_MATERIAS = "NOTAS_MATERIAS";
 export const NOTES_CHECK = "NOTES_CHECK";
-export const CARGA_MATERIA = "CARGA_MATERIA";
+export const CREATE_MATERIA = "CREATE_MATERIA";
 export const PROFESORES_REQ = "PROFESORES_REQ";
+export const PROFESOR_CREATE = "PROFESOR_CREATE";
+export const PROFESOR_UPDATE = "PROFESOR_UPDATE";
+export const GET_PROFESOR = "GET_PROFESOR";
+export const RESET_PROFESOR = "RESET_PROFESOR";
 
-export function agregarMateria(datos){
-  let req = axios.post(`${SERVER}/susbjects`, datos);
+export function getMaterias(idestudiante=null){
+  let req = null;
+  if(idestudiante){
+    req = axios.get(`${SERVER}/student/${idestudiante}/subjects`);
+  }else{
+    req = axios.get(`${SERVER}/subjects`);
+  }
   return {
-    type: CARGA_MATERIA,
+    type: MATERIAS_REQ,
+    payload: req
+  };
+}
+export function getMateria(idmateria){
+  let req = axios.get(`${SERVER}/subjects/${idmateria}`);
+  return {
+    type: GET_MATERIA,
+    payload: req
+  };
+}
+export function createMateria(subject){
+  let req = axios.post(`${SERVER}/subjects`, { subject });
+  return {
+    type: CREATE_MATERIA,
+    payload: req
+  };
+}
+export function updateMateria(subject){
+  let req = axios.put(`${SERVER}/subjects/${subject.id}`, { subject });
+  return {
+    type: UPDATE_MATERIA,
     payload: req
   };
 }
@@ -58,12 +95,24 @@ export function loguear(correo, contrasenha, mantener=false){
   };
 }
 
-export function getAlumno(idalumno){
-  let req = axios.get(`${SERVER}/students/${idalumno}`,{
-    headers: {'Accept': 'application/json'}
-  });
+export function getEstudiante(idestudiante){
+  let req = axios.get(`${SERVER}/students/${idestudiante}`);
   return {
-    type: ALUMNO_REQ,
+    type: ESTUDIANTE_REQ,
+    payload: req
+  };
+}
+export function createEstudiante(student){
+  let req = axios.post(`${SERVER}/students`,{ student });
+  return {
+    type: CREATE_ESTUDIANTE,
+    payload: req
+  };
+}
+export function updateEstudiante(student){
+  let req = axios.put(`${SERVER}/students/${student.id}`,{ student });
+  return {
+    type: UPDATE_ESTUDIANTE,
     payload: req
   };
 }
@@ -111,7 +160,7 @@ export function reloguin(){
 
 export function getAlumnosParaCargar(idmateria){
   return {
-    type: GET_ALUMNOS_PARA_CARGA,
+    type: GET_ESTUDIANTES_PARA_CARGA,
     payload: [
       {
         id: 1,
@@ -161,8 +210,8 @@ export function getMateriasACargo(idusuario){
   };
 }
 
-export function getMateriasCursandose(idalumno){
-  let req = axios.get(`${SERVER}/students/${idalumno}/subjects`);
+export function getMateriasCursandose(idestudiante){
+  let req = axios.get(`${SERVER}/students/${idestudiante}/subjects`);
 
   return {
     type: GET_MATERIAS_CURSANDOSE,
@@ -170,19 +219,6 @@ export function getMateriasCursandose(idalumno){
   };
 }
 
-export function getMaterias(idalumno=null){
-  let req = null;
-  if(idalumno){
-    req = axios.get(`${SERVER}/student/${idalumno}/subjects`);
-
-  }else{
-    req = axios.get(`${SERVER}/subjects`);
-  }
-  return {
-    type: GET_MATERIAS,
-    payload: req
-  };
-}
 
 export function getProfesores(){
   let req = axios.get(`${SERVER}/professors`);
@@ -191,8 +227,35 @@ export function getProfesores(){
     payload: req
   };
 }
+export function getProfesor(id){
+  let req = axios.get(`${SERVER}/professors/${id}`);
+  return {
+    type: GET_PROFESOR,
+    payload: req
+  };
+}
+export function createProfesor(professor){
+  let req = axios.post(`${SERVER}/professors`, { professor });
+  return {
+    type: PROFESOR_CREATE,
+    payload: req
+  };
+}
+export function updateProfesor(professor){
+  let req = axios.put(`${SERVER}/professors/${professor.id}`, { professor });
+  return {
+    type: PROFESOR_UPDATE,
+    payload: req
+  };
+}
+export function resetProfesor(){
+  return {
+    type: RESET_PROFESOR,
+    payload: {}
+  };
+}
 
-export function getNotas(idalumno){
+export function getNotas(idestudiante){
   return {
     type: GET_NOTAS,
     payload: [
@@ -255,6 +318,27 @@ export function getExamenes(){
   let req = axios.get(`${SERVER}/examinations`);
   return {
     type: GET_EXAMENES,
+    payload: req
+  };
+}
+export function getExamen(idexamen){
+  let req = axios.get(`${SERVER}/examinations/${idexamen}`);
+  return {
+    type: GET_EXAMEN,
+    payload: req
+  };
+}
+export function createExamen(examination){
+  let req = axios.post(`${SERVER}/examinations`, { examination });
+  return {
+    type: CREATE_EXAMEN,
+    payload: req
+  };
+}
+export function updateExamen(examination){
+  let req = axios.put(`${SERVER}/examinations/${examination.id}`, { examination });
+  return {
+    type: UPDATE_EXAMEN,
     payload: req
   };
 }
