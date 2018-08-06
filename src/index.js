@@ -25,6 +25,7 @@ import ListaNotasMaterias from './containers/lista-notas';
 import ListarMaterias from './containers/listar-materias';
 import ListarCarreras from './containers/listar-carreras';
 import ListarProfesores from './containers/listar-profesores';
+import ListarEstudiantes from './containers/listar-estudiantes';
 
 export const develop = window.location.hostname==="localhost";
 
@@ -80,6 +81,7 @@ if(isMobile()){
             <Route path="/materias" component={ListarMaterias} />
             <Route path="/carreras" component={ListarCarreras} />
             <Route path="/profesores" component={ListarProfesores} />
+            <Route path="/estudiantes" component={ListarEstudiantes} />
             <Route path="/por-aprobar" component={NotasPorAprobar} />
             <Route path="/editar-materia/:materia_id" component={CargarMateria} />
             <Route path="/cargar-materia" component={CargarMateria} />

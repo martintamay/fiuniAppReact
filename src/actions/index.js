@@ -18,6 +18,8 @@ export const NOTAS_MATERIAS = "NOTAS_MATERIAS";
 export const NOTES_CHECK = "NOTES_CHECK";
 export const CARGA_MATERIA = "CARGA_MATERIA";
 export const PROFESORES_REQ = "PROFESORES_REQ";
+export const ESTUDIANTES_REQ= "ESTUDIANTES_REQ";
+
 
 export function agregarMateria(datos){
   let req = axios.post(`${SERVER}/susbjects`, datos);
@@ -189,6 +191,13 @@ export function getProfesores(){
   return {
     type: PROFESORES_REQ,
     payload: req
+  };
+}
+export function getEstudiantes(){
+  let req = axios.get(`${SERVER}/students`);
+  return{
+      type: ESTUDIANTES_REQ,
+      payload: req
   };
 }
 

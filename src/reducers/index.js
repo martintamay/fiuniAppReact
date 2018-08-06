@@ -13,6 +13,7 @@ import alumnoReducer from './alumno-reducer';
 import alumnosParaCargaReducer from './alumnos-para-carga-reducer';
 import listaNotasMateriaReducer from './notas-materias-reducer';
 import notificationsManager from './notifications-manager';
+import estudiantesReducer from './estudiantes-reducer';
 
 
 const rootReducer = combineReducers(
@@ -23,6 +24,7 @@ const rootReducer = combineReducers(
     materias: materiasReducer,
     carreras: carrerasReducer,
     profesores: profesoresReducer,
+    estudiantes: estudiantesReducer,
     materiasCursandose: materiasCursandoseReducer,
     materiasACargo: materiasACargoReducer,
     alumnosParaCargar: alumnosParaCargaReducer,
