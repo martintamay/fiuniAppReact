@@ -25,10 +25,15 @@ export const NOTAS_MATERIAS = "NOTAS_MATERIAS";
 export const NOTES_CHECK = "NOTES_CHECK";
 export const CREATE_MATERIA = "CREATE_MATERIA";
 export const PROFESORES_REQ = "PROFESORES_REQ";
+<<<<<<< HEAD
 export const PROFESOR_CREATE = "PROFESOR_CREATE";
 export const PROFESOR_UPDATE = "PROFESOR_UPDATE";
 export const GET_PROFESOR = "GET_PROFESOR";
 export const RESET_PROFESOR = "RESET_PROFESOR";
+=======
+export const ESTUDIANTES_REQ= "ESTUDIANTES_REQ";
+
+>>>>>>> b3fb2b2926f5c2862eb8a77890396e52d220e97a
 
 export function getMaterias(idestudiante=null){
   let req = null;
@@ -248,10 +253,18 @@ export function updateProfesor(professor){
     payload: req
   };
 }
+<<<<<<< HEAD
 export function resetProfesor(){
   return {
     type: RESET_PROFESOR,
     payload: {}
+=======
+export function getEstudiantes(){
+  let req = axios.get(`${SERVER}/students`);
+  return{
+      type: ESTUDIANTES_REQ,
+      payload: req
+>>>>>>> b3fb2b2926f5c2862eb8a77890396e52d220e97a
   };
 }
 

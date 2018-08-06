@@ -32,6 +32,7 @@ class Notas extends Component {
     this.props.getMaterias(this.props.match.params.user_id);
   }
 
+
   renderNotas(porAnho){
     let materias = this.props.materias;
     return Object.keys(porAnho).map(function(anho, index) {
