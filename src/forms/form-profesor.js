@@ -7,7 +7,7 @@ export default class FormProfesor extends Component {
     super(props);
 
     this.onSubmit = this.onSubmit.bind(this);
-    this.getInitialState = this.getInitialState.bind(this);
+    this.getInitialValues = this.getInitialValues.bind(this);
   }
 
   onSubmit(values){
@@ -33,7 +33,7 @@ export default class FormProfesor extends Component {
         <Scope scope="person">
           <div className="form-row">
             <div className="col-md-6">
-              <label htmlFor="inputProfesor"s>Nombre Completo</label>
+              <label htmlFor="inputProfesor">Nombre Completo</label>
               <Text className="form-control"
                 id="inputProfesor"
                 placeholder="Nombre"

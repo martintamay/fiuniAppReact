@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { Form, Text, Select, Option } from 'informed';
 
-import { getMaterias } from '../actions';
+import { getMaterias, getCarreras } from '../actions';
 
 class FormExamen extends Component {
   constructor(props){
@@ -17,21 +17,34 @@ class FormExamen extends Component {
     if(this.props.materias === null){
       this.props.getMaterias();
     }
+    if(this.props.carreras === null){
+      this.props.getCarreras();
+    }
   }
 
   renderMaterias(){
     let materias = this.props.materias;
-    if (materias === null) {
+    let carreras = this.props.carreras;
+    if (materias === null || carreras == null) {
       return <Option value="0" key="carr0" disabled>Cargando materias...</Option>;
     }
 
     const sinEsp = <Option value="0" key="carr0" disabled>Elija una materias</Option>;
-    let opMaterias = Object.keys(materias).map(function(id, index) {
+    materias = Object.values(materias);
+    materias.sort((a,b)=>{
+      if (a.name < b.name)
+        return -1;
+      if (a.name > b.name)
+        return 1;
+      return 0;
+    });
+
+    let opMaterias = materias.map((materia) => {
       return (
         <Option
-          key={id}
-          value={id}>
-          {materias[id].name}
+          key={materia.id}
+          value={materia.id}>
+          {materia.name} - {carreras[materia.career.id].description}
         </Option>
       );
     });
@@ -86,13 +99,14 @@ class FormExamen extends Component {
   }
 }
 
-function mapStateToProps({ materias }) {
-  return { materias };
+function mapStateToProps({ materias, carreras }) {
+  return { materias, carreras };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    getMaterias: getMaterias
+    getMaterias: getMaterias,
+    getCarreras: getCarreras
   }, dispatch)
 }
 

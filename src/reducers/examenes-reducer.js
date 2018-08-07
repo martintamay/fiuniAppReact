@@ -1,8 +1,8 @@
-import { GET_MATERIAS_A_CARGO } from '../actions';
+import { GET_EXAMENES } from '../actions';
 
 export default function(state=null, action){
   switch (action.type) {
-    case GET_MATERIAS_A_CARGO:
+    case GET_EXAMENES:
       return action.payload.data;
     default:
       return state;

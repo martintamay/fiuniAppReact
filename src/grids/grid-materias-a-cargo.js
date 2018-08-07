@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 //aca importas los metodos de actions
-import { getMaterias, getCarreras } from '../actions';
+import { getCarreras } from '../actions';
 
 //para ver esta pantalla tenes que agregar en el src/index.js como hicimos con los
 //otros, en donde están los routes, después ya solo entrá al enlace que le pusiste
@@ -20,16 +20,17 @@ class GridMaterias extends Component {
   // aca podes pedirle las cosas al servidor antes de que cargue la pantalla
   componentDidMount(){
     this.props.getCarreras();
-    this.props.getMaterias();
   }
 
   //los formatters son funciones para cambiar como se muestran los datos
   //cell tiene el valor de esa celda en específico y row tiene todos los
   //valores de la fila, en este caso tiene el profesor
   renderButtons(cell, row){
+    var fecha = new Date();
+    var anho = fecha.getFullYear();
     return (
-      <Link to={`/materias/${row.id}/editar`} className='btn btn-light'>
-        Editar
+      <Link to={`/materias/${row.id}/notas/${anho}`} className='btn btn-light'>
+        Revisar
       </Link>
     );
   }
@@ -53,7 +54,7 @@ class GridMaterias extends Component {
       text: 'Semestre',
       sort: true
     }, {
-      dataField: 'career.id',
+      dataField: 'career_id',
       text: 'Carrera',
       formatter: this.carreraFormatter,
       sort: true
@@ -87,15 +88,14 @@ class GridMaterias extends Component {
 
 //las cosas que queres traer del state de redux
 //estos estan en el index de reducer la lista de lo que ya hay
-function mapStateToProps({ materias, carreras }) {
-  return { materias, carreras };
+function mapStateToProps({ carreras }) {
+  return { carreras };
 }
 
 //los metodos que queres usar de actions para pedirle cosas al servidor
 //acordate de importar los metodos arriba
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    getMaterias: getMaterias,
     getCarreras: getCarreras
   }, dispatch)
 }

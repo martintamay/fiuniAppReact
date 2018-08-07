@@ -2,29 +2,12 @@ import React, { Component } from 'react';
 import { getMateriasACargo } from '../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+
+import GridMateriasACargo from '../grids/grid-materias-a-cargo';
 
 class MateriasACargo extends Component {
   componentDidMount(){
-    /*if(this.props.usuario===null || this.props.usuario===undefined){
-      if(localStorage.getItem("session_token")!=null){
-        this.props.recuperarLogueo(localStorage.getItem("session_token"));
-      }
-    }*/
-    this.props.getMateriasACargo(this.props.match.params.user_id);
-  }
-
-  renderMaterias(){
-    let materias = this.props.materiasACargo;
-    return materias.map((materia)=>{
-      return (
-        <Link className="list-group-item list-group-item-action"
-          key={materia.id}
-          to={`/materias/${materia.id}/notas`} >
-          {materia.name}
-        </Link>
-      );
-    });
+    this.props.getMateriasACargo(this.props.match.params.profesor_id);
   }
 
   render(){
@@ -46,13 +29,7 @@ class MateriasACargo extends Component {
       <section id="materias-a-cargo">
         <div className="container card">
           <h1>Materias A Cargo</h1>
-          <ul className="list-group lista-materias">
-            {this.renderMaterias()}
-          </ul>
-          <small className="font-weight-bold">
-            *Haga click en la materia para ir a ella y ver los estudiantes o
-            hacer cambios
-          </small>
+          <GridMateriasACargo materias={this.props.materiasACargo} />
         </div>
       </section>
     );

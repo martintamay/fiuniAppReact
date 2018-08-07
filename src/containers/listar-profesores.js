@@ -19,13 +19,13 @@ class ListarProfesores extends Component {
         <div className="container card">
           <h2>Lista de Profesores</h2>
           <hr />
+          <GridProfesores />
           <div className="btn-group ml-auto">
             <Link className="btn btn-primary"
               to="/profesores/nuevo">
               Agregar
             </Link>
           </div>
-          <GridProfesores />
         </div>
       </section>
     );

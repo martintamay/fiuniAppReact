@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -31,13 +32,16 @@ class GridProfesores extends Component {
   getColumns(){
     return [{
       dataField: 'id',
-      text: '#ID'
+      text: '#ID',
+      sort: true
     }, {
       dataField: 'person.names',
-      text: 'Nombre'
+      text: 'Nombre',
+      sort: true
     }, {
       dataField: 'person.email',
-      text: 'Correo'
+      text: 'Correo',
+      sort: true
     }, {
       dataField: '',
       text: '',
@@ -60,7 +64,7 @@ class GridProfesores extends Component {
     //ese return reemplazas retornando tu html entre parentesis
     //si pediste cosas de redux podes acceder haciendo this.props.loquepediste
     return (
-      <Table keyField='id' data={ this.props.profesores } columns={ this.getColumns() } />
+      <Table keyField='id' data={ this.props.profesores } columns={ this.getColumns() } pagination={ paginationFactory() } />
     );
   }
 }

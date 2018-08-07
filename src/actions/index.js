@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-//const SERVER = "https://fiuni-app.herokuapp.com/api";
-const SERVER = "http://localhost:3000/api";
+const SERVER = "https://fiuni-app.herokuapp.com/api";
+//const SERVER = "http://localhost:3000/api";
 
 export const ERRLOGIN = "ERRLOGIN";
 export const LOGIN_REQ = "LOGIN_REQ";
@@ -24,21 +24,18 @@ export const UPDATE_ESTUDIANTE = "UPDATE_ESTUDIANTE";
 export const NOTAS_MATERIAS = "NOTAS_MATERIAS";
 export const NOTES_CHECK = "NOTES_CHECK";
 export const CREATE_MATERIA = "CREATE_MATERIA";
+export const RESET_MATERIA = "RESET_MATERIA";
 export const PROFESORES_REQ = "PROFESORES_REQ";
-<<<<<<< HEAD
 export const PROFESOR_CREATE = "PROFESOR_CREATE";
 export const PROFESOR_UPDATE = "PROFESOR_UPDATE";
 export const GET_PROFESOR = "GET_PROFESOR";
 export const RESET_PROFESOR = "RESET_PROFESOR";
-=======
 export const ESTUDIANTES_REQ= "ESTUDIANTES_REQ";
-
->>>>>>> b3fb2b2926f5c2862eb8a77890396e52d220e97a
 
 export function getMaterias(idestudiante=null){
   let req = null;
   if(idestudiante){
-    req = axios.get(`${SERVER}/student/${idestudiante}/subjects`);
+    req = axios.get(`${SERVER}/students/${idestudiante}/subjects`);
   }else{
     req = axios.get(`${SERVER}/subjects`);
   }
@@ -47,11 +44,40 @@ export function getMaterias(idestudiante=null){
     payload: req
   };
 }
+export function getMateriasACargo(idprofesor){
+  let req = axios.get(`${SERVER}/professors/${idprofesor}/subjects`);
+
+  return {
+    type: GET_MATERIAS_A_CARGO,
+    payload: req
+  }
+  /*return {
+    type: GET_MATERIAS_A_CARGO,
+    payload: [
+      {
+        "id": 1,
+        "name": "Física 1",
+        "semester": 1
+      },
+      {
+        "id": 2,
+        "name": "Análisis 1",
+        "semester": 1
+      }
+    ]
+  };*/
+}
 export function getMateria(idmateria){
   let req = axios.get(`${SERVER}/subjects/${idmateria}`);
   return {
     type: GET_MATERIA,
     payload: req
+  };
+}
+export function resetMateria(){
+  return {
+    type: RESET_MATERIA,
+    payload: {}
   };
 }
 export function createMateria(subject){
@@ -78,8 +104,13 @@ export function enviarNotasRevisadas(notas){
     payload: req
   }
 }
-export function notasMateria(idmateria){
-  let req = axios.get(`${SERVER}/subjects/${idmateria}/notes`);
+export function notasMateria(idmateria, anho){
+  let req;
+  if(anho===undefined){
+    req = axios.get(`${SERVER}/subjects/${idmateria}/notes`);
+  } else {
+    req = axios.get(`${SERVER}/subjects/${idmateria}/notes/taken/from-year/${anho}`);
+  }
   return {
     type: NOTAS_MATERIAS, payload:req
   };
@@ -197,23 +228,6 @@ export function getAlumnosParaCargar(idmateria){
   };
 }
 
-export function getMateriasACargo(idusuario){
-  return {
-    type: GET_MATERIAS_A_CARGO,
-    payload: [
-      {
-        "id": 1,
-        "name": "Física 1",
-        "semester": 1
-      },
-      {
-        "id": 2,
-        "name": "Análisis 1",
-        "semester": 1
-      }
-    ]
-  };
-}
 
 export function getMateriasCursandose(idestudiante){
   let req = axios.get(`${SERVER}/students/${idestudiante}/subjects`);
@@ -253,18 +267,17 @@ export function updateProfesor(professor){
     payload: req
   };
 }
-<<<<<<< HEAD
 export function resetProfesor(){
   return {
     type: RESET_PROFESOR,
     payload: {}
-=======
+  };
+}
 export function getEstudiantes(){
   let req = axios.get(`${SERVER}/students`);
   return{
       type: ESTUDIANTES_REQ,
       payload: req
->>>>>>> b3fb2b2926f5c2862eb8a77890396e52d220e97a
   };
 }
 
@@ -327,8 +340,13 @@ export function getExamenesPorAprobar(){
     payload: req
   };
 }
-export function getExamenes(){
-  let req = axios.get(`${SERVER}/examinations`);
+export function getExamenes(idmateria = null){
+  let req;
+  if(idmateria !== null){
+    req = axios.get(`${SERVER}/subjects/${idmateria}/examinations`);
+  }else {
+    req = axios.get(`${SERVER}/examinations`);
+  }
   return {
     type: GET_EXAMENES,
     payload: req

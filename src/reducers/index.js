@@ -3,6 +3,7 @@ import { loadingBarReducer } from 'react-redux-loading-bar'
 
 import examenesPorAprobarReducer from './examenes-por-aprobar-reducer';
 import examenReducer from './examen-reducer';
+import examenesReducer from './examenes-reducer';
 import materiasCursandoseReducer from './materias-cursandose-reducer';
 import materiasACargoReducer from './materias-a-cargo-reducer';
 import materiasReducer from './materias-reducer';
@@ -15,7 +16,6 @@ import usuarioReducer from './usuario-reducer';
 import estudianteReducer from './estudiante-reducer';
 import estudiantesParaCargaReducer from './estudiantes-para-carga-reducer';
 import listaNotasMateriaReducer from './notas-materias-reducer';
-import notificationsManager from './notifications-manager';
 import estudiantesReducer from './estudiantes-reducer';
 
 
@@ -23,6 +23,7 @@ const rootReducer = combineReducers(
   {
     usuario: usuarioReducer,
     examen: examenReducer,
+    examenes: examenesReducer,
     examenesPorAprobar: examenesPorAprobarReducer,
     notas: notasReducer,
     materias: materiasReducer,

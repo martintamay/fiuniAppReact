@@ -37,7 +37,7 @@ class Menu extends Component {
     if (usuario.professor!==null) {
       let professorList = [
         (<li className="nav-item" key="p-materias-a-cargo">
-          <Link className="nav-link" to="/materias-a-cargo">
+          <Link className="nav-link" to={`/profesores/${usuario.professor.id}/materias`}>
             Materias a Cargo
           </Link>
         </li>),
@@ -54,17 +54,23 @@ class Menu extends Component {
         (
           <li className="nav-item dropdown" key="a-agregar-menu">
             <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Agregar
+              Items
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <Link className="dropdown-item" to="/cargar-materia">
-                Materia
+              <Link className="dropdown-item" to="/profesores">
+                Profesores
               </Link>
-              <Link className="dropdown-item" to="/cargar-profesor">
-                Profesor
+              <Link className="dropdown-item" to="/estudiantes">
+                Estudiantes
               </Link>
-              <Link className="dropdown-item" to="/cargar-estudiante">
-                Profesor
+              <Link className="dropdown-item" to="/carreras">
+                Carreras
+              </Link>
+              <Link className="dropdown-item" to="/materias">
+                Materias
+              </Link>
+              <Link className="dropdown-item" to="/examenes">
+                Examenes
               </Link>
             </div>
           </li>

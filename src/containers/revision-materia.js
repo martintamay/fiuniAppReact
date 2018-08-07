@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-export default class RevisionMateria extends Component {
+import { getMaterias } from '../actions';
+
+class RevisionMateria extends Component {
   constructor(props){
     super(props);
 
@@ -94,10 +98,11 @@ export default class RevisionMateria extends Component {
   }
 
   render(){
+    console.log("materias",this.props.materias[this.props.lista.subject.id].name);
     return (
       <section id="revision-materia">
         <div className="container card">
-          <h1>Control de aprobación de {this.props.lista.subject.name}</h1>
+          <h1>Control de aprobación de {this.props.materias!==null ? this.props.materias[this.props.lista.subject.id].name : this.props.lista.subject.id} - {this.props.lista.examination_date}</h1>
           <hr />
           <table className="table table-striped table-bordered tabla-notas">
             <thead>
@@ -130,3 +135,15 @@ export default class RevisionMateria extends Component {
     );
   }
 }
+
+function mapStateToProps({ materias }) {
+  return { materias };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    getMaterias: getMaterias
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RevisionMateria);

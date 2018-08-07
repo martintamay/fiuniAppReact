@@ -3,7 +3,7 @@ import { getExamenesPorAprobar, getExamenes, getMaterias, enviarNotasRevisadas }
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import RevisionMateria from '../components/revision-materia';
+import RevisionMateria from '../containers/revision-materia';
 import '../assets/toggle-switch.css';
 
 class examenesPorAprobar extends Component {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -21,7 +22,7 @@ class GridEstudiantes extends Component {
   //valores de la fila, en este caso tiene el profesor
   renderButtons(cell, row){
     return (
-      <Link to={`/student/${row.id}/editar`} className='btn btn-light'>
+      <Link to={`/estudiantes/${row.id}/editar`} className='btn btn-light'>
         Editar
       </Link>
     );
@@ -31,24 +32,29 @@ class GridEstudiantes extends Component {
   getColumns(){
     return [{
       dataField: 'id',
-      text: '#ID'
+      text: '#ID',
+      sort: true
     }, {
       dataField: 'person.names',
-      text: 'Nombre'
+      text: 'Nombre',
+      sort: true
     }, {
       dataField: 'person.email',
-      text: 'Correo'
+      text: 'Correo',
+      sort: true
     }, {
       dataField: 'entry_year',
-      text: 'Ingreso'
+      text: 'Ingreso',
+      sort: true
     }, {
       dataField: 'career.description',
-      text: 'Carrera'
-      }, {
-    dataField: '',
-    text: '',
-    formatter: this.renderButtons
-  }];
+      text: 'Carrera',
+      sort: true
+    }, {
+      dataField: '',
+      text: '',
+      formatter: this.renderButtons
+    }];
 }
 
   render(){
@@ -66,7 +72,7 @@ class GridEstudiantes extends Component {
     //ese return reemplazas retornando tu html entre parentesis
     //si pediste cosas de redux podes acceder haciendo this.props.loquepediste
     return (
-      <Table keyField='id' data={ this.props.estudiantes } columns={ this.getColumns() } />
+      <Table keyField='id' data={ this.props.estudiantes } columns={ this.getColumns() } pagination={ paginationFactory() } />
     );
   }
 }
