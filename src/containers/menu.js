@@ -26,7 +26,7 @@ class Menu extends Component {
           <Link className="nav-link" to="/notas">Notas </Link>
         </li>),
         (<li className="nav-item" key="s-perfil">
-          <Link className="nav-link" to={`/estudiante/${usuario.student.id}`}>Perfil </Link>
+          <Link className="nav-link" to={`/estudiantes/${usuario.student.id}/editar`}>Perfil </Link>
         </li>),
         (<li className="nav-item" key="s-materias">
           <Link className="nav-link" to={`/materias/${usuario.student.id}`}>Materias </Link>
