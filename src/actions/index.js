@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios from '../utils/axios-personalized';
 
-const SERVER = "https://fiuni-app.herokuapp.com/api";
-//const SERVER = "http://localhost:3000/api";
+//const SERVER = "https://fiuni-app.herokuapp.com/api";
+const SERVER = "http://localhost:3000/api";
 
 export const ERRLOGIN = "ERRLOGIN";
 export const LOGIN_REQ = "LOGIN_REQ";
