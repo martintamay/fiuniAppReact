@@ -12,7 +12,7 @@ class FormEstudiante extends Component {
 
     this.onSubmit = this.onSubmit.bind(this);
     this.getInitialValues = this.getInitialValues.bind(this);
-  }  
+  }
 
   componentDidMount(){
     if(this.props.carreras===null){
@@ -116,15 +116,19 @@ class FormEstudiante extends Component {
         <hr />
         <div className="float-right ml-auto">
           <button type="submit" className="btn btn-primary">Guardar</button>
-          <Link className="btn btn-secondary" to="/estudiantes">Cancelar</Link>
+          {
+            this.props.usuario!==null && this.props.usuario.student.id === undefined ?
+            <Link className="btn btn-secondary" to="/estudiantes">Cancelar</Link> :
+            ""
+          }
         </div>
       </Form>
     );
   }
 }
 
-function mapStateToProps({ carreras }) {
-  return { carreras };
+function mapStateToProps({ carreras, usuario }) {
+  return { carreras, usuario };
 }
 
 function mapDispatchToProps(dispatch) {

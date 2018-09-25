@@ -20,9 +20,10 @@ export default function(state=null, action){
         }
         return action.payload.data;
       } else if (action.payload.response.status === 401) {
-        NotificationManager.warning("Usuario o contraseña incorrectos");
         if (!window.location.pathname.includes('login')){
           window.location.pathname = '/login';
+        } else {
+          NotificationManager.warning("Usuario o contraseña incorrectos");
         }
         return state;
       } else if (action.payload.response.status === 404) {
