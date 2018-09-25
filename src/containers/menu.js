@@ -42,7 +42,7 @@ class Menu extends Component {
           </Link>
         </li>),
         (<li className="nav-item" key="p-perfil">
-          <Link className="nav-link" to={`/profesor/${usuario.professor.id}`}>
+          <Link className="nav-link" to={`/profesores/${usuario.professor.id}/editar`}>
             Datos Profesor
           </Link>
         </li>)

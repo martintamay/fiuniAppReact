@@ -23,11 +23,6 @@ class Notas extends Component {
 
 
   componentDidMount(){
-    /*if(this.props.usuario===null || this.props.usuario===undefined){
-      if(localStorage.getItem("session_token")!=null){
-        this.props.recuperarLogueo(localStorage.getItem("session_token"));
-      }
-    }*/
     this.props.getNotas(this.props.match.params.user_id);
     this.props.getMaterias(this.props.match.params.user_id);
   }
