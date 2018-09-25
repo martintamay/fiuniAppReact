@@ -36,6 +36,7 @@ class GridMaterias extends Component {
   }
 
   carreraFormatter(cell, row){
+    console.log("carreras", this.props.carreras);
     return this.props.carreras!==null ? this.props.carreras[cell].description : cell;
   }
 
@@ -75,8 +76,6 @@ class GridMaterias extends Component {
     //derecho inspeccionar y debe haber una pertaña que se llama consola y ahí
     //aparece. Después de terminar las pantallas sacá nomas este log para que no
     //imprima cosas en consola al pedo
-    console.log("materias", this.props.materias);
-    console.log("carreras", this.props.carreras);
 
     //ese return reemplazas retornando tu html entre parentesis
     //si pediste cosas de redux podes acceder haciendo this.props.loquepediste

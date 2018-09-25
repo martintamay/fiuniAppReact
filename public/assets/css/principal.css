@@ -43,3 +43,7 @@ html, body {
 .lista-materias li {
   cursor: pointer;
 }
+
+.btn-danger {
+  color: white !important;
+}

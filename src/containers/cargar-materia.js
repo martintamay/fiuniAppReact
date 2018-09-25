@@ -14,13 +14,12 @@ class CargarMateria extends Component {
   }
 
   onSubmit(materia){
-    console.log("materia", materia);
     this.props.createMateria(materia);
   }
 
   render(){
     if(this.props.materia!==null){
-      return <Redirect to={`/materias/${this.props.materia.id}/editar`} />
+      return <Redirect to={`/materias`} />
     }
     return (
       <section id="carga-materia">

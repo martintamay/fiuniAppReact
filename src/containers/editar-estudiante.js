@@ -20,12 +20,10 @@ class EditarEstudiante extends Component {
   }
 
   onSubmit(estudiante){
-    console.log("estudiante", estudiante);
     this.props.updateEstudiante(estudiante);
   }
 
   render(){
-    console.log("estudiante", this.props);
     if(this.props.estudiante===null ||
       this.props.estudiante.id!==Number(this.props.match.params.estudiante_id)){
       return (
@@ -44,7 +42,6 @@ class EditarEstudiante extends Component {
         <div className="container card">
           <h1>Editar Estudiante</h1>
           <hr/>
-
           <FormEstudiante onSubmit={this.onSubmit} estudiante={this.props.estudiante} />
         </div>
       </section>

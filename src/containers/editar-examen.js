@@ -21,12 +21,10 @@ class EditarExamen extends Component {
 
 
   onSubmit(examen){
-    console.log("examen", examen);
     this.props.updateExamen(examen);
   }
 
   render(){
-    console.log("examen", this.props);
     if(this.props.examen===null ||
       this.props.examen.id!==Number(this.props.match.params.examen_id)){
       return (

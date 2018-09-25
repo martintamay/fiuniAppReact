@@ -39,7 +39,7 @@ class GridCarreras extends Component {
     //derecho inspeccionar y debe haber una pertaña que se llama consola y ahí
     //aparece. Después de terminar las pantallas sacá nomas este log para que no
     //imprima cosas en consola al pedo
-    console.log("carreras", this.props.carreras);
+    //console.log("carreras", this.props.carreras);
 
     //ese return reemplazas retornando tu html entre parentesis
     //si pediste cosas de redux podes acceder haciendo this.props.loquepediste

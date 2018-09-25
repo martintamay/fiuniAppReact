@@ -14,13 +14,12 @@ class CargarEstudiante extends Component {
   }
 
   onSubmit(datos){
-    console.log(datos);
     this.props.createEstudiante(datos);
   }
 
   render(){
     if(this.props.estudiante!==null){
-      return <Redirect to={`/estudiante/${this.props.estudiante.id}/editar`} />
+      return <Redirect to={`/estudiantes/${this.props.estudiante.id}/editar`} />
     }
     return (
       <section id="carga-estudiante">

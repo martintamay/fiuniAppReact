@@ -12,3 +12,7 @@ export function success(mensaje, titulo, timeout, callback, priority){
 export function info(mensaje, titulo, timeout, callback, priority){
   NotificationManager.info(mensaje, titulo, timeout, callback, priority);
 }
+
+export function isAdmin(usr) {
+  return usr!==undefined && usr!==null && usr.administrator!==undefined && usr.administrator!==null && usr.administrator.id!==undefined;
+}

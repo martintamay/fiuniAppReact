@@ -25,7 +25,7 @@ class ListarEstudiantes extends Component {
           <GridEstudiantes />
           <div className="btn-group ml-auto">
             <Link className="btn btn-primary"
-              to="cargar-alumno">
+              to="estudiantes/nuevo">
               Agregar
             </Link>
           </div>

@@ -38,7 +38,6 @@ class examenesPorAprobar extends Component {
     this.props.enviarNotasRevisadas(notasOrdenadas);
     this.props.getExamenesPorAprobar();
     this.setState({ notasCorrigiendose: null });
-    console.log(notasOrdenadas);
   }
 
   renderNotas(notes){
@@ -46,7 +45,6 @@ class examenesPorAprobar extends Component {
       return (<tr><td colSpan="3">Cargando...</td></tr>);
     }
     notes = notes.sort(function(a,b) {return (a.examination_date > b.examination_date) ? 1 : ((b.examination_date > a.examination_date) ? -1 : 0);});
-    console.log("notes", notes);
     return notes.map((note)=>{
       return (
         <tr key={`npa-${note.subject.id}-${note.examination_date}`}>

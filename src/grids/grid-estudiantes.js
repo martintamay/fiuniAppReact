@@ -67,7 +67,7 @@ class GridEstudiantes extends Component {
     //derecho inspeccionar y debe haber una pertaña que se llama consola y ahí
     //aparece. Después de terminar las pantallas sacá nomas este log para que no
     //imprima cosas en consola al pedo
-    console.log("estudiantes", this.props.estudiantes);
+    //console.log("estudiantes", this.props.estudiantes);
 
     //ese return reemplazas retornando tu html entre parentesis
     //si pediste cosas de redux podes acceder haciendo this.props.loquepediste

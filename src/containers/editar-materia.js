@@ -21,12 +21,10 @@ class EditarMateria extends Component {
 
 
   onSubmit(materia){
-    console.log("materia", materia);
     this.props.updateMateria(materia);
   }
 
   render(){
-    console.log("materia", this.props);
     if(this.props.materia===null ||
       this.props.materia.id!==Number(this.props.match.params.materia_id)){
       return (
@@ -47,6 +45,7 @@ class EditarMateria extends Component {
             <FormMateria onSubmit={this.onSubmit} materia={this.props.materia} />
           </div>
       </section>
+
     );
   }
 }

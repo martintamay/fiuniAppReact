@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios from '../utils/axios';
 
-const SERVER = "https://fiuni-app.herokuapp.com/api";
-//const SERVER = "http://localhost:3000/api";
+//const SERVER = "https://fiuni-app.herokuapp.com/api";
+const SERVER = "http://localhost:3000/api";
 
 export const ERRLOGIN = "ERRLOGIN";
 export const LOGIN_REQ = "LOGIN_REQ";
@@ -14,8 +14,11 @@ export const GET_MATERIAS_CURSANDOSE = "GET_MATERIAS_CURSANDOSE";
 export const GET_MATERIAS_A_CARGO = "GET_MATERIAS_A_CARGO";
 export const GET_CARRERAS = "GET_CARRERAS";
 export const GET_EXAMENES = "GET_EXAMENES";
+export const GET_EXAMENES_DISPONIBLES = "GET_EXAMENES_DISPONIBLES";
+export const GET_EXAMENES_INSCRITO = "GET_EXAMENES_INSCRITO";
 export const CREATE_EXAMEN = "CREATE_EXAMEN";
 export const UPDATE_EXAMEN = "UPDATE_EXAMEN";
+export const RESET_EXAMEN = "RESET_EXAMEN";
 export const GET_EXAMEN = "GET_EXAMEN";
 export const GET_ESTUDIANTES_PARA_CARGA = "GET_ESTUDIANTES_PARA_CARGA";
 export const ESTUDIANTE_REQ = "ESTUDIANTE_REQ";
@@ -30,6 +33,7 @@ export const PROFESOR_CREATE = "PROFESOR_CREATE";
 export const PROFESOR_UPDATE = "PROFESOR_UPDATE";
 export const GET_PROFESOR = "GET_PROFESOR";
 export const RESET_PROFESOR = "RESET_PROFESOR";
+export const SET_PROFESOR_MATERIA = "SET_PROFESOR_MATERIA";
 export const ESTUDIANTES_REQ= "ESTUDIANTES_REQ";
 
 export function getMaterias(idestudiante=null){
@@ -51,26 +55,18 @@ export function getMateriasACargo(idprofesor){
     type: GET_MATERIAS_A_CARGO,
     payload: req
   }
-  /*return {
-    type: GET_MATERIAS_A_CARGO,
-    payload: [
-      {
-        "id": 1,
-        "name": "Física 1",
-        "semester": 1
-      },
-      {
-        "id": 2,
-        "name": "Análisis 1",
-        "semester": 1
-      }
-    ]
-  };*/
 }
 export function getMateria(idmateria){
   let req = axios.get(`${SERVER}/subjects/${idmateria}`);
   return {
     type: GET_MATERIA,
+    payload: req
+  };
+}
+export function setProfesorMateria(idmateria, professor_id){
+  let req = axios.put(`${SERVER}/subjects/${idmateria}/set-professor`, { professor_id });
+  return {
+    type: SET_PROFESOR_MATERIA,
     payload: req
   };
 }
@@ -352,6 +348,23 @@ export function getExamenes(idmateria = null){
     payload: req
   };
 }
+
+export function getExamenesInscrito(idalumno){
+  let req = axios.get(`${SERVER}/students/${idalumno}/examination_inscriptions`);
+  return {
+    type: GET_EXAMENES_INSCRITO,
+    payload: req
+  };
+}
+
+export function getExamenesDisponibles(idalumno){
+  let req = axios.get(`${SERVER}/students/${idalumno}/available_examinations`);
+  return {
+    type: GET_EXAMENES_DISPONIBLES,
+    payload: req
+  };
+}
+
 export function getExamen(idexamen){
   let req = axios.get(`${SERVER}/examinations/${idexamen}`);
   return {
@@ -359,6 +372,7 @@ export function getExamen(idexamen){
     payload: req
   };
 }
+
 export function createExamen(examination){
   let req = axios.post(`${SERVER}/examinations`, { examination });
   return {
@@ -371,6 +385,12 @@ export function updateExamen(examination){
   return {
     type: UPDATE_EXAMEN,
     payload: req
+  };
+}
+export function resetExamen(){
+  return {
+    type: RESET_EXAMEN,
+    payload: {}
   };
 }
 

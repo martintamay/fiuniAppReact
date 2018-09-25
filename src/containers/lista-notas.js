@@ -38,7 +38,6 @@ class ListaNotas extends Component {
   }
 
   renderAlumno(){
-    console.log("lista notas materias", this.props.listaNotasMateria);
     let estudiantes = this.props.listaNotasMateria;
 
     return estudiantes.map((estudiante)=>{
@@ -74,6 +73,15 @@ class ListaNotas extends Component {
         <section id="notas-materia">
           <div className="container card">
             <h2 className="card-title">Cargando...</h2>
+
+            <div className="float-right ml-auto">
+              <button
+                onClick={()=>this.props.history.goBack()}
+                type="button"
+                className="btn btn-secondary">
+                Volver
+              </button>
+            </div>
           </div>
         </section>
       );
@@ -86,6 +94,7 @@ class ListaNotas extends Component {
         return <Redirect to={`/materias/${this.props.match.params.materia_id}/notas/${this.state.anho}`} />;
       }
     }
+
     return (
       <section id="notas-materia">
         <div className="container card">
@@ -130,6 +139,15 @@ class ListaNotas extends Component {
               {this.renderAlumno()}
             </tbody>
           </table>
+
+          <div className="float-right ml-auto">
+            <button
+              onClick={()=>this.props.history.goBack()}
+              type="button"
+              className="btn btn-secondary">
+              Volver
+            </button>
+          </div>
         </div>
       </section>
     );

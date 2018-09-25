@@ -18,7 +18,6 @@ class CargarProfesor extends Component {
   }
 
   onSubmit(profesor){
-    console.log("profesor", profesor);
     this.props.createProfesor(profesor);
   }
 

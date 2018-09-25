@@ -29,7 +29,7 @@ class FormExamen extends Component {
       return <Option value="0" key="carr0" disabled>Cargando materias...</Option>;
     }
 
-    const sinEsp = <Option value="0" key="carr0" disabled>Elija una materias</Option>;
+    const sinEsp = <Option value="0" key="carr0" disabled>Elija un materia</Option>;
     materias = Object.values(materias);
     materias.sort((a,b)=>{
       if (a.name < b.name)

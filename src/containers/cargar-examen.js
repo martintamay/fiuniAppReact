@@ -14,13 +14,12 @@ class CargarExamen extends Component {
   }
 
   onSubmit(examen){
-    console.log("examen", examen);
     this.props.createExamen(examen);
   }
 
   render(){
     if(this.props.examen!==null){
-      return <Redirect to={`/examenes/${this.props.examen.id}/editar`} />
+      return <Redirect to={`/examenes`} />
     }
     return (
       <section id="carga-examen">

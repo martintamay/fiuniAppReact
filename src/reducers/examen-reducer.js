@@ -1,4 +1,4 @@
-import { GET_EXAMEN, CREATE_EXAMEN, UPDATE_EXAMEN } from '../actions';
+import { GET_EXAMEN, CREATE_EXAMEN, UPDATE_EXAMEN, RESET_EXAMEN } from '../actions';
 
 export default function(state=null, action){
   switch (action.type) {
@@ -8,6 +8,8 @@ export default function(state=null, action){
       return action.payload.data;
     case UPDATE_EXAMEN:
       return action.payload.data;
+    case RESET_EXAMEN:
+      return null;
     default:
       return state;
   }

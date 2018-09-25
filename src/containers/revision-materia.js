@@ -98,7 +98,6 @@ class RevisionMateria extends Component {
   }
 
   render(){
-    console.log("materias",this.props.materias[this.props.lista.subject.id].name);
     return (
       <section id="revision-materia">
         <div className="container card">

@@ -55,12 +55,6 @@ class GridProfesores extends Component {
       return "Cargando...";
     }
 
-    //con console.log imprimis cosas en el log, en firefox o chrome hace click
-    //derecho inspeccionar y debe haber una pertaña que se llama consola y ahí
-    //aparece. Después de terminar las pantallas sacá nomas este log para que no
-    //imprima cosas en consola al pedo
-    console.log("profesores", this.props.profesores);
-
     //ese return reemplazas retornando tu html entre parentesis
     //si pediste cosas de redux podes acceder haciendo this.props.loquepediste
     return (

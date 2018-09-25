@@ -22,7 +22,7 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if(nextProps.usuario!==undefined) console.log("usuario", nextProps.usuario);
+    //if(nextProps.usuario!==undefined) console.log("usuario", nextProps.usuario);
   }
 
   onChangeHandler(event){

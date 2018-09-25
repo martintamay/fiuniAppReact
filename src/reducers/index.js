@@ -17,6 +17,8 @@ import estudianteReducer from './estudiante-reducer';
 import estudiantesParaCargaReducer from './estudiantes-para-carga-reducer';
 import listaNotasMateriaReducer from './notas-materias-reducer';
 import estudiantesReducer from './estudiantes-reducer';
+import examenesInscritoReducer from './examenes-inscrito-reducer';
+import examenesDisponiblesReducer from './examenes-disponibles-reducer';
 
 
 const rootReducer = combineReducers(
@@ -37,7 +39,9 @@ const rootReducer = combineReducers(
     estudiantesParaCargar: estudiantesParaCargaReducer,
     estudiante: estudianteReducer,
     loadingBar: loadingBarReducer,
-    listaNotasMateria: listaNotasMateriaReducer
+    listaNotasMateria: listaNotasMateriaReducer,
+    examenes_inscrito: examenesInscritoReducer,
+    examenes_disponibles: examenesDisponiblesReducer
   }
 );
 

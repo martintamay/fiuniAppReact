@@ -7,6 +7,9 @@ import { connect } from 'react-redux';
 
 //aca importas los metodos de actions
 import { getMaterias, getCarreras } from '../actions';
+import { isAdmin } from '../utils';
+
+const anho  = new Date().getFullYear();
 
 //para ver esta pantalla tenes que agregar en el src/index.js como hicimos con los
 //otros, en donde están los routes, después ya solo entrá al enlace que le pusiste
@@ -28,9 +31,14 @@ class GridMaterias extends Component {
   //valores de la fila, en este caso tiene el profesor
   renderButtons(cell, row){
     return (
-      <Link to={`/materias/${row.id}/editar`} className='btn btn-light'>
-        Editar
-      </Link>
+      <div className="btn btn-group">
+        <Link to={`/materias/${row.id}/editar`} className='btn btn-light'>
+          Editar
+        </Link>
+        <Link to={`/materias/${row.id}/notas/${anho}`} className='btn btn-light'>
+          Revisar
+        </Link>
+      </div>
     );
   }
 
@@ -40,7 +48,7 @@ class GridMaterias extends Component {
 
   //devuelve la configuración de las columnas
   getColumns(){
-    return [{
+    let campos = [{
       dataField: 'id',
       text: '#ID',
       sort: true
@@ -57,11 +65,15 @@ class GridMaterias extends Component {
       text: 'Carrera',
       formatter: this.carreraFormatter,
       sort: true
-    }, {
-      dataField: '',
-      text: '',
-      formatter: this.renderButtons
     }];
+    if(isAdmin(this.props.usuario)){
+      campos.push({
+        dataField: '',
+        text: '',
+        formatter: this.renderButtons
+      });
+    }
+    return campos;
 }
 
   render(){
@@ -69,13 +81,6 @@ class GridMaterias extends Component {
     if(this.props.materias===null){
       return "Cargando...";
     }
-
-    //con console.log imprimis cosas en el log, en firefox o chrome hace click
-    //derecho inspeccionar y debe haber una pertaña que se llama consola y ahí
-    //aparece. Después de terminar las pantallas sacá nomas este log para que no
-    //imprima cosas en consola al pedo
-    console.log("materias", this.props.materias);
-    console.log("carreras", this.props.carreras);
 
     //ese return reemplazas retornando tu html entre parentesis
     //si pediste cosas de redux podes acceder haciendo this.props.loquepediste
@@ -87,8 +92,8 @@ class GridMaterias extends Component {
 
 //las cosas que queres traer del state de redux
 //estos estan en el index de reducer la lista de lo que ya hay
-function mapStateToProps({ materias, carreras }) {
-  return { materias, carreras };
+function mapStateToProps({ materias, carreras, usuario }) {
+  return { materias, carreras, usuario };
 }
 
 //los metodos que queres usar de actions para pedirle cosas al servidor
