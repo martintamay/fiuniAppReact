@@ -19,6 +19,7 @@ import listaNotasMateriaReducer from './notas-materias-reducer';
 import estudiantesReducer from './estudiantes-reducer';
 import examenesInscritoReducer from './examenes-inscrito-reducer';
 import examenesDisponiblesReducer from './examenes-disponibles-reducer';
+import cursadasReducer from './cursadas-reducer';
 
 
 const rootReducer = combineReducers(
@@ -38,6 +39,7 @@ const rootReducer = combineReducers(
     materiasACargo: materiasACargoReducer,
     estudiantesParaCargar: estudiantesParaCargaReducer,
     estudiante: estudianteReducer,
+    cursadas: cursadasReducer,
     loadingBar: loadingBarReducer,
     listaNotasMateria: listaNotasMateriaReducer,
     examenes_inscrito: examenesInscritoReducer,

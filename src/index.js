@@ -33,6 +33,8 @@ import ListarCarreras from './containers/listar-carreras';
 import ListarProfesores from './containers/listar-profesores';
 import ListarEstudiantes from './containers/listar-estudiantes';
 import PantallaExamenes from './containers/pantalla-examenes';
+import ExamenesDisponibles from './containers/listar-examenes-disponibles';
+//import ExamenesInscrito from './containers/pantalla-inscrito';
 
 export const develop = window.location.hostname==="localhost";
 
@@ -79,9 +81,10 @@ if(isMobile()){
           <Route path="/" component={LoadingBar} />
 
           <Switch>
-            <Route path="/notas" component={Notas} />
             <Route path="/estudiantes/nuevo" component={CargarEstudiante} />
+            <Route path="/estudiantes/:estudiante_id/notas" component={Notas} />
             <Route path="/estudiantes/:estudiante_id/editar" component={EditarEstudiante} />
+            <Route path="/estudiantes/:estudiante_id/examenes/inscribirse" component={ExamenesDisponibles} />
             <Route path="/estudiantes/:estudiante_id/examenes" component={PantallaExamenes} />
             <Route path="/materias/nuevo" component={CargarMateria} />
             <Route path="/materias/:materia_id/notas/:anho" component={ListaNotasMaterias} />

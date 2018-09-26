@@ -22,9 +22,14 @@ class GridEstudiantes extends Component {
   //valores de la fila, en este caso tiene el profesor
   renderButtons(cell, row){
     return (
-      <Link to={`/estudiantes/${row.id}/editar`} className='btn btn-light'>
-        Editar
-      </Link>
+      <div className="btn btn-group">
+        <Link to={`/estudiantes/${row.id}/notas`} className='btn btn-light'>
+          Ver notas
+        </Link>
+        <Link to={`/estudiantes/${row.id}/editar`} className='btn btn-light'>
+          Editar
+        </Link>
+      </div>
     );
   }
 

@@ -23,13 +23,18 @@ class Menu extends Component {
     if (usuario.student!==null) {
       let studentList = [
         (<li className="nav-item" key="s-notas">
-          <Link className="nav-link" to="/notas">Notas </Link>
+          <Link className="nav-link" to={`/estudiantes/${usuario.student.id}/notas`}>Notas </Link>
         </li>),
         (<li className="nav-item" key="s-perfil">
           <Link className="nav-link" to={`/estudiantes/${usuario.student.id}/editar`}>Perfil </Link>
         </li>),
         (<li className="nav-item" key="s-materias">
           <Link className="nav-link" to={`/materias/${usuario.student.id}`}>Materias </Link>
+        </li>),
+        (<li className="nav-item" key="s-inscripcion-examen">
+          <Link className="nav-link" to={`/estudiantes/${usuario.student.id}/examenes/inscribirse`}>
+            Inscribirse Examen
+          </Link>
         </li>)
       ];
       lista = studentList;

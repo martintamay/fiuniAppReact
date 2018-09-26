@@ -13,9 +13,11 @@ export default class GridExamenesDisponibles extends Component {
 
   renderButtons(cell, row){
     return (
-      <a className='btn btn-danger'>
+      <button
+        className='btn btn-light'
+        onClick={()=>this.props.inscribir(row) }>
         Inscribirse
-      </a>
+      </button>
     );
   }
 
@@ -25,7 +27,7 @@ export default class GridExamenesDisponibles extends Component {
   carreraFormatter(cell, row){
     return this.props.carreras!==null ? this.props.carreras[cell].description : cell;
   }
-  
+
   getColumns(){
     return [{
       dataField: 'id',
@@ -52,19 +54,9 @@ export default class GridExamenesDisponibles extends Component {
 }
 
   render(){
-    //avisas que esta cargando si lo que le pediste a redux es null todavia
     if(this.props.examenes===null){
       return "Cargando...";
     }
-    console.log("GridED examenes", this.props.examenes);
-    console.log("GridED materias", this.props.materias);
-    //con console.log imprimis cosas en el log, en firefox o chrome hace click
-    //derecho inspeccionar y debe haber una pertaña que se llama consola y ahí
-    //aparece. Después de terminar las pantallas sacá nomas este log para que no
-    //imprima cosas en consola al pedo
-
-    //ese return reemplazas retornando tu html entre parentesis
-    //si pediste cosas de redux podes acceder haciendo this.props.loquepediste
     return (
       <Table keyField='id' data={ this.props.examenes } columns={ this.getColumns() } pagination={ paginationFactory() } />
     );

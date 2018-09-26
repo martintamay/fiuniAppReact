@@ -25,7 +25,6 @@ class MateriasACargo extends Component {
   }
 
   renderPantallaAgregar(){
-//TODO: retornar el formulario
     return (
       <section id="agregar-materias-a-cargo">
         <div className="container card">

@@ -35,6 +35,8 @@ export const GET_PROFESOR = "GET_PROFESOR";
 export const RESET_PROFESOR = "RESET_PROFESOR";
 export const SET_PROFESOR_MATERIA = "SET_PROFESOR_MATERIA";
 export const ESTUDIANTES_REQ= "ESTUDIANTES_REQ";
+export const INSCRIPCION_ALUMNO= "INSCRIPCION_ALUMNO";
+export const GET_CURSADAS_ESTUDIANTE= "GET_CURSADAS_ESTUDIANTE";
 
 export function getMaterias(idestudiante=null){
   let req = null;
@@ -278,54 +280,10 @@ export function getEstudiantes(){
 }
 
 export function getNotas(idestudiante){
+  let req = axios.get(`${SERVER}/students/${idestudiante}/notes`);
   return {
     type: GET_NOTAS,
-    payload: [
-      {
-        "id": 1,
-        "noteType": "PP",
-        "takenDate": "2017-05-10",
-        "score": 4,
-        "percentage": 85,
-        "opportunity": 1,
-        "taken": {
-          "subject_id": 1
-        }
-      },
-      {
-        "id": 2,
-        "noteType": "FINAL",
-        "takenDate": "2018-06-15",
-        "score": 5,
-        "percentage": 100,
-        "opportunity": 1,
-        "taken": {
-          "subject_id": 1
-        }
-      },
-      {
-        "id": 3,
-        "noteType": "FINAL",
-        "takenDate": "2017-06-15",
-        "score": 1,
-        "percentage": 20,
-        "opportunity": 1,
-        "taken": {
-          "subject_id": 2
-        }
-      },
-      {
-        "id": 4,
-        "noteType": "FINAL",
-        "takenDate": "2018-06-15",
-        "score": 3,
-        "percentage": 75,
-        "opportunity": 1,
-        "taken": {
-          "subject_id": 1
-        }
-      }
-    ]
+    payload: req
   };
 }
 
@@ -345,6 +303,18 @@ export function getExamenes(idmateria = null){
   }
   return {
     type: GET_EXAMENES,
+    payload: req
+  };
+}
+export function inscribirExamen(examen_id, cursada_id){
+  let req = axios.post(`${SERVER}/examination_inscriptions`, {
+    examination_inscription: {
+      examination_id: examen_id,
+      taken_id: cursada_id
+    }
+  });
+  return {
+    type: INSCRIPCION_ALUMNO,
     payload: req
   };
 }
@@ -394,6 +364,13 @@ export function resetExamen(){
   };
 }
 
+export function getCursadasAlumno(idalumno){
+  let req = axios.get(`${SERVER}/students/${idalumno}/active-takens`);
+  return {
+    type: GET_CURSADAS_ESTUDIANTE,
+    payload: req
+  };
+}
 
 function setSessionStorage(mantener){
   if(mantener===true){

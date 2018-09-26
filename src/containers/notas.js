@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getNotas, getMaterias } from '../actions';
+import { getNotas, getMaterias, getEstudiante } from '../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -23,8 +23,9 @@ class Notas extends Component {
 
 
   componentDidMount(){
-    this.props.getNotas(this.props.match.params.user_id);
-    this.props.getMaterias(this.props.match.params.user_id);
+    this.props.getNotas(this.props.match.params.estudiante_id);
+    this.props.getMaterias(this.props.match.params.estudiante_id);
+    this.props.getEstudiante(this.props.match.params.estudiante_id);
   }
 
 
@@ -44,19 +45,19 @@ class Notas extends Component {
   updateNotasPorMateria(){
     let materias = {};
     this.props.notas.forEach((nota)=>{
-      if (materias[nota.takenDate.substring(0, 4)]===undefined) {
-        materias[nota.takenDate.substring(0, 4)] = {};
+      if (materias[nota.examination.examination_date.substring(0, 4)]===undefined) {
+        materias[nota.examination.examination_date.substring(0, 4)] = {};
       }
-      if(materias[nota.takenDate.substring(0, 4)][nota.taken.subject_id]===undefined){
-        materias[nota.takenDate.substring(0, 4)][nota.taken.subject_id] = [];
+      if(materias[nota.examination.examination_date.substring(0, 4)][nota.subject.id]===undefined){
+        materias[nota.examination.examination_date.substring(0, 4)][nota.subject.id] = [];
       }
-      materias[nota.takenDate.substring(0, 4)][nota.taken.subject_id].push({
+      materias[nota.examination.examination_date.substring(0, 4)][nota.subject.id].push({
         id: nota.id,
-        tipo: nota.noteType==="PP"?"Puntos Parciales":"Final",
+        tipo: nota.examination.examination_type==="PP"?"Puntos Parciales":"Final",
         oportunidad: nota.opportunity,
         puntaje: nota.score,
         porcentaje: nota.percentage,
-        fecha: nota.takenDate
+        fecha: nota.examination.examination_date
       });
     });
     this.setState({ notasPorMateria: materias });
@@ -70,7 +71,7 @@ class Notas extends Component {
   }
 
   render(){
-    if (this.state.notasPorMateria===null || this.props.materias===null) {
+    if (this.state.notasPorMateria===null || this.props.materias===null || this.props.estudiante===null) {
         return (
           <section id="notas">
             <div className="container card">
@@ -85,13 +86,42 @@ class Notas extends Component {
           </section>
         );
     }
+    if (this.props.notas.length === 0) {
+        return (
+          <section id="notas">
+            <div className="container card">
+              <h1>Notas - {this.props.estudiante.person.names}</h1>
+              <hr />
+              <div className="card">
+                <div className="card-header">
+                  Sin notas que mostrar
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+    }
     return (
       <section id="notas">
         <div className="container card">
-          <h1>Notas</h1>
+          <h1>Notas - {this.props.estudiante.person.names}</h1>
           <hr />
           <div className="card">
             {this.renderNotas(this.state.notasPorMateria)}
+          </div>
+          <div className="btn btn-group">
+            {
+              this.props.usuario.administrator.id!==undefined ?
+
+              <div className="float-right ml-auto">
+                <button
+                  onClick={()=>this.props.history.goBack()}
+                  type="button"
+                  className="btn btn-light float-right">
+                  Volver
+                </button>
+              </div> : ""
+            }
           </div>
         </div>
       </section>
@@ -99,14 +129,15 @@ class Notas extends Component {
   }
 }
 
-function mapStateToProps({ usuario, notas, materias }) {
-  return { usuario, notas, materias };
+function mapStateToProps({ usuario, notas, materias, estudiante }) {
+  return { usuario, notas, materias, estudiante };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     getNotas: getNotas,
-    getMaterias: getMaterias
+    getMaterias: getMaterias,
+    getEstudiante: getEstudiante
   }, dispatch)
 }
 

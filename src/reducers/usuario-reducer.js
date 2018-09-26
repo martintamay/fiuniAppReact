@@ -33,6 +33,14 @@ export default function(state=null, action){
         return state;
       }
     case RELOGIN_REQ:
+      if(action.payload.status===401){
+        alert("No tienes permisos para realizar esta acción");
+        if (!window.location.pathname.includes('login')){
+          window.location.pathname = '/login';
+        } else {
+          NotificationManager.warning("Usuario o contraseña incorrectos");
+        }
+      }
       if (action.payload.data!==undefined && action.payload.data!==null){
         if (localStorage.getItem("session_token")!==null) {
           localStorage.setItem("session_token", action.payload.data.session_token);
