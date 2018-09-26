@@ -3,9 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import GridExamenesInscrito from '../grids/grid-examenes-inscrito';
+import GridExamenesInscripto from '../grids/grid-examenes-inscripto';
 import GridExamenesDisponibles from '../grids/grid-examenes-disponibles';
-import { getMaterias, getExamenesInscrito, getExamenesDisponibles, reloguin } from '../actions';
+import { getMaterias, getExamenesInscripto, getExamenesDisponibles, reloguin } from '../actions';
 
 class PantallaExamenes extends Component {
   constructor(props){
@@ -29,7 +29,7 @@ class PantallaExamenes extends Component {
   componentDidUpdate(prevProps) {
     if(prevProps.usuario === null && this.props.usuario!==null){
       this.props.getExamenesDisponibles(this.props.usuario.student.id);
-      this.props.getExamenesInscrito(this.props.usuario.student.id);
+      this.props.getExamenesInscripto(this.props.usuario.student.id);
     }
   }
 
@@ -44,7 +44,7 @@ class PantallaExamenes extends Component {
   }
 
   render(){
-    if(this.props.materias===null || this.props.examenes_inscrito===null || this.props.examenes_disponibles===null || this.props.usuario===null){
+    if(this.props.materias===null || this.props.examenes_inscripto===null || this.props.examenes_disponibles===null || this.props.usuario===null){
       return (
         <section id="listados-examenes">
           <div className="container card">
@@ -60,7 +60,7 @@ class PantallaExamenes extends Component {
         <Redirect to="/login" />
       );
     }
-    console.log("inscrito", this.props.examenes_inscrito);
+    console.log("inscripto", this.props.examenes_inscripto);
     console.log("disponibles", this.props.examenes_disponibles);
     return (
       <section id="listados-examenes">
@@ -76,7 +76,7 @@ class PantallaExamenes extends Component {
             <li className="nav-item">
               <a className={"nav-link " + (!this.state.show_disponibles ? "active" : "") }
                 onClick={this.onChangeTab}>
-                  Inscrito
+                  Inscripto
               </a>
             </li>
           </ul>
@@ -87,15 +87,15 @@ class PantallaExamenes extends Component {
                 <b>Exámenes Disponibles</b>
                 <GridExamenesDisponibles
                   materias={this.props.materias}
-                  examenes={this.props.examenes_inscrito} />
+                  examenes={this.props.examenes_inscripto} />
               </div>
             ) :
             (
               <div>
-                <b>Exámenes Actualmente Inscrito</b>
-                <GridExamenesInscrito
+                <b>Exámenes Actualmente Inscripto</b>
+                <GridExamenesInscripto
                   materias={this.props.materias}
-                  examenes={this.props.examenes_inscrito} />
+                  examenes={this.props.examenes_inscripto} />
               </div>
             )
           }
@@ -106,15 +106,15 @@ class PantallaExamenes extends Component {
   }
 }
 
-function mapStateToProps({ usuario, materias, examenes_disponibles, examenes_inscrito }) {
-  return { usuario, materias, examenes_disponibles, examenes_inscrito };
+function mapStateToProps({ usuario, materias, examenes_disponibles, examenes_inscripto }) {
+  return { usuario, materias, examenes_disponibles, examenes_inscripto };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     getMaterias: getMaterias,
     getExamenesDisponibles: getExamenesDisponibles,
-    getExamenesInscrito: getExamenesInscrito,
+    getExamenesInscripto: getExamenesInscripto,
     reloguin: reloguin
   }, dispatch)
 }

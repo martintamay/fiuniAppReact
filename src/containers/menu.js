@@ -32,8 +32,8 @@ class Menu extends Component {
           <Link className="nav-link" to={`/materias/${usuario.student.id}`}>Materias </Link>
         </li>),
         (<li className="nav-item" key="s-inscripcion-examen">
-          <Link className="nav-link" to={`/estudiantes/${usuario.student.id}/examenes/inscribirse`}>
-            Inscribirse Examen
+          <Link className="nav-link" to={`/estudiantes/${usuario.student.id}/examenes`}>
+            Examenes
           </Link>
         </li>)
       ];

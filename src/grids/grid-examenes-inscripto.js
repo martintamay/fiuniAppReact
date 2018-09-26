@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Table from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 
-export default class GridExamenesInscrito extends Component {
+export default class GridExamenesInscripto extends Component {
   constructor(props){
     super(props);
 
@@ -14,9 +14,11 @@ export default class GridExamenesInscrito extends Component {
   renderButtons(cell, row){
     //TODO: hacer que se pueda anular una inscripción a un examen
     return (
-      <a className='btn btn-danger'>
+      <button
+        className='btn btn-danger'
+        onClick={()=>this.props.eliminar(row)} >
         Cancelar Inscripción
-      </a>
+      </button>
     );
   }
 

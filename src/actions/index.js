@@ -15,7 +15,8 @@ export const GET_MATERIAS_A_CARGO = "GET_MATERIAS_A_CARGO";
 export const GET_CARRERAS = "GET_CARRERAS";
 export const GET_EXAMENES = "GET_EXAMENES";
 export const GET_EXAMENES_DISPONIBLES = "GET_EXAMENES_DISPONIBLES";
-export const GET_EXAMENES_INSCRITO = "GET_EXAMENES_INSCRITO";
+export const GET_EXAMENES_INSCRIPTO = "GET_EXAMENES_INSCRIPTO";
+export const DEL_EXAMENES_INSCRIPTO = "DEL_EXAMENES_INSCRIPTO";
 export const CREATE_EXAMEN = "CREATE_EXAMEN";
 export const UPDATE_EXAMEN = "UPDATE_EXAMEN";
 export const RESET_EXAMEN = "RESET_EXAMEN";
@@ -319,10 +320,17 @@ export function inscribirExamen(examen_id, cursada_id){
   };
 }
 
-export function getExamenesInscrito(idalumno){
+export function getExamenesInscripto(idalumno){
   let req = axios.get(`${SERVER}/students/${idalumno}/examination_inscriptions`);
   return {
-    type: GET_EXAMENES_INSCRITO,
+    type: GET_EXAMENES_INSCRIPTO,
+    payload: req
+  };
+}
+export function deleteExamenesInscripto(idinscripcion){
+  let req = axios.delete(`${SERVER}/examination_inscriptions/${idinscripcion}`);
+  return {
+    type: DEL_EXAMENES_INSCRIPTO,
     payload: req
   };
 }
