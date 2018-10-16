@@ -24,6 +24,8 @@ import CargarMateria from './containers/cargar-materia';
 import EditarMateria from './containers/editar-materia';
 import CargarProfesor from './containers/cargar-profesor';
 import EditarProfesor from './containers/editar-profesor';
+import CargarAdministrador from './containers/cargar-administrador';
+import EditarAdministrador from './containers/editar-administrador';
 import CargarExamen from './containers/cargar-examen';
 import EditarExamen from './containers/editar-examen';
 import ListaNotasMaterias from './containers/lista-notas';
@@ -31,8 +33,9 @@ import ListarMaterias from './containers/listar-materias';
 import ListarExamenes from './containers/listar-examenes';
 import ListarCarreras from './containers/listar-carreras';
 import ListarProfesores from './containers/listar-profesores';
+import ListarAdministradores from './containers/listar-administradores';
 import ListarEstudiantes from './containers/listar-estudiantes';
-import PantallaExamenes from './containers/pantalla-examenes';
+//import PantallaExamenes from './containers/pantalla-examenes';
 import ExamenesDisponibles from './containers/listar-examenes-disponibles';
 import ListarExamenesInscripto from './containers/listar-examenes-inscripto';
 
@@ -101,6 +104,9 @@ if(isMobile()){
             <Route path="/profesores/:profesor_id/editar" component={EditarProfesor} />
             <Route path="/profesores/:profesor_id/materias" component={MateriasACargo} />
             <Route path="/profesores" component={ListarProfesores} />
+            <Route path="/administradores/nuevo" component={CargarAdministrador} />
+            <Route path="/administradores/:administrador_id/editar" component={EditarAdministrador} />
+            <Route path="/administradores" component={ListarAdministradores} />
             <Route path="/estudiantes" component={ListarEstudiantes} />
             <Route path="/por-aprobar" component={NotasPorAprobar} />
             <Route path="/profesor/:idprofesor" component={CargarProfesor} />

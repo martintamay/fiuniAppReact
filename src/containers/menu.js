@@ -68,6 +68,9 @@ class Menu extends Component {
               <Link className="dropdown-item" to="/estudiantes">
                 Estudiantes
               </Link>
+              <Link className="dropdown-item" to="/administradores">
+                Administradores
+              </Link>
               <Link className="dropdown-item" to="/carreras">
                 Carreras
               </Link>

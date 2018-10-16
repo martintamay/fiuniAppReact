@@ -12,6 +12,8 @@ import carrerasReducer from './carreras-reducer';
 import notasReducer from './notas-reducer';
 import profesoresReducer from './profesores-reducer';
 import profesorReducer from './profesor-reducer';
+import administradoresReducer from './administradores-reducer';
+import administradorReducer from './administrador-reducer';
 import usuarioReducer from './usuario-reducer';
 import estudianteReducer from './estudiante-reducer';
 import estudiantesParaCargaReducer from './estudiantes-para-carga-reducer';
@@ -34,6 +36,8 @@ const rootReducer = combineReducers(
     carreras: carrerasReducer,
     profesores: profesoresReducer,
     profesor: profesorReducer,
+    administradores: administradoresReducer,
+    administrador: administradorReducer,
     estudiantes: estudiantesReducer,
     materiasCursandose: materiasCursandoseReducer,
     materiasACargo: materiasACargoReducer,

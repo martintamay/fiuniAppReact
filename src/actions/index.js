@@ -34,6 +34,11 @@ export const PROFESOR_CREATE = "PROFESOR_CREATE";
 export const PROFESOR_UPDATE = "PROFESOR_UPDATE";
 export const GET_PROFESOR = "GET_PROFESOR";
 export const RESET_PROFESOR = "RESET_PROFESOR";
+export const ADMINISTRADORES_REQ = "ADMINISTRADORES_REQ";
+export const ADMINISTRADOR_CREATE = "ADMINISTRADOR_CREATE";
+export const ADMINISTRADOR_UPDATE = "ADMINISTRADOR_UPDATE";
+export const GET_ADMINISTRADOR = "GET_ADMINISTRADOR";
+export const RESET_ADMINISTRADOR = "RESET_ADMINISTRADOR";
 export const SET_PROFESOR_MATERIA = "SET_PROFESOR_MATERIA";
 export const ESTUDIANTES_REQ= "ESTUDIANTES_REQ";
 export const INSCRIPCION_ALUMNO= "INSCRIPCION_ALUMNO";
@@ -272,6 +277,43 @@ export function resetProfesor(){
     payload: {}
   };
 }
+
+//comienzo administradores
+export function getAdministradores(){
+  let req = axios.get(`${SERVER}/administrators`);
+  return {
+    type: ADMINISTRADORES_REQ,
+    payload: req
+  };
+}
+export function getAdministrador(id){
+  let req = axios.get(`${SERVER}/administrators/${id}`);
+  return {
+    type: GET_ADMINISTRADOR,
+    payload: req
+  };
+}
+export function createAdministrador(administrator){
+  let req = axios.post(`${SERVER}/administrators`, { administrator });
+  return {
+    type: ADMINISTRADOR_CREATE,
+    payload: req
+  };
+}
+export function updateAdministrador(administrator){
+  let req = axios.put(`${SERVER}/administrators/${administrator.id}`, { administrator });
+  return {
+    type: ADMINISTRADOR_UPDATE,
+    payload: req
+  };
+}
+export function resetAdministrador(){
+  return {
+    type: RESET_ADMINISTRADOR,
+    payload: {}
+  };
+}
+//fin administradores
 export function getEstudiantes(){
   let req = axios.get(`${SERVER}/students`);
   return{
