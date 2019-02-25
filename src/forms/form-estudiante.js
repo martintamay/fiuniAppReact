@@ -117,7 +117,7 @@ class FormEstudiante extends Component {
         <div className="float-right ml-auto">
           <button type="submit" className="btn btn-primary">Guardar</button>
           {
-            this.props.usuario!==null && this.props.usuario.student.id === undefined ?
+            this.props.usuario!==null && this.props.usuario.student!==null && this.props.usuario.student.id === undefined ?
             <Link className="btn btn-secondary" to="/estudiantes">Cancelar</Link> :
             ""
           }

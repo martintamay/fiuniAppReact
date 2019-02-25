@@ -3,9 +3,7 @@ import { updateAdministrador, getAdministrador } from '../actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import MateriasACargo from '../containers/materias_a_cargo';
 import FormAdministrador from '../forms/form-administrador';
-import { isAdmin } from '../utils';
 
 class EditarAdministrador extends Component {
   constructor(props){

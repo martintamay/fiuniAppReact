@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 //aca importas los metodos de actions
-import { getMaterias, getCarreras } from '../actions';
+import { getMaterias, getCarreras, getMateriasCarrera } from '../actions';
 import { isAdmin } from '../utils';
 
 const anho  = new Date().getFullYear();
@@ -22,8 +22,12 @@ class GridMaterias extends Component {
   }
   // aca podes pedirle las cosas al servidor antes de que cargue la pantalla
   componentDidMount(){
+    if(this.props.idCarrera!==undefined){
+      this.props.getMateriasCarrera(this.props.idCarrera);
+    } else {
+      this.props.getMaterias();
+    }
     this.props.getCarreras();
-    this.props.getMaterias();
   }
 
   //los formatters son funciones para cambiar como se muestran los datos
@@ -100,8 +104,7 @@ function mapStateToProps({ materias, carreras, usuario }) {
 //acordate de importar los metodos arriba
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    getMaterias: getMaterias,
-    getCarreras: getCarreras
+    getMaterias, getCarreras, getMateriasCarrera
   }, dispatch)
 }
 

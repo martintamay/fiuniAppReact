@@ -3,6 +3,7 @@ import Table from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 //aca importas los metodos de actions
 import { getCarreras } from '../actions';
@@ -16,17 +17,41 @@ class GridCarreras extends Component {
     this.props.getCarreras();
   }
 
+  renderButtons(cell, row){
+    return (
+      <Link to={`/carreras/${row.id}/materias`} className='btn btn-outline-secondary'>
+        Ver Materias
+      </Link>
+    );
+  }
+
   //devuelve la configuración de las columnas
   getColumns(){
-    return [{
-      dataField: 'id',
-      text: '#ID',
-      sort: true
-    }, {
-      dataField: 'description',
-      text: 'Materia',
-      sort: true
-    }];
+    if(this.props.redirectSubjects===undefined || this.props.redirectSubjects!=="true"){
+      return [{
+        dataField: 'id',
+        text: '#ID',
+        sort: true
+      }, {
+        dataField: 'description',
+        text: 'Materia',
+        sort: true
+      }];
+    } else {
+      return [{
+        dataField: 'id',
+        text: '#ID',
+        sort: true
+      }, {
+        dataField: 'description',
+        text: 'Materia',
+        sort: true
+      },{
+        dataField: '',
+        text: '',
+        formatter: this.renderButtons
+      }];
+    }
 }
 
   render(){

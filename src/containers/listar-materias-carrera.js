@@ -1,14 +1,14 @@
 import React from 'react';
 
-import GridCarreras from '../grids/grid-carreras'
+import GridMaterias from '../grids/grid-materias'
 
 export default (props)=>{
     return (
       <section id="carga-materia">
         <div className="container card">
-          <h2>Lista de Carreras</h2>
+          <h2>Lista de Materias de Carrera</h2>
           <hr />
-          <GridCarreras />
+          <GridMaterias idCarrera={props.match.params.carrera_id}/>
         </div>
       </section>
     );

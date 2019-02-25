@@ -56,6 +56,13 @@ export function getMaterias(idestudiante=null){
     payload: req
   };
 }
+export function getMateriasCarrera(idCarrera){
+  let req = axios.get(`${SERVER}/career/${idCarrera}/subjects`);
+  return {
+    type: MATERIAS_REQ,
+    payload: req
+  };
+}
 export function getMateriasACargo(idprofesor){
   let req = axios.get(`${SERVER}/professors/${idprofesor}/subjects`);
 

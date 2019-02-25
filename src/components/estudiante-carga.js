@@ -31,6 +31,28 @@ export default class AlumnoCarga extends Component {
     return nota;
   }
 
+  colorNota(nota){
+    switch (nota) {
+      case undefined:
+        return "";
+      case "":
+        return "";
+      case "1":
+        return "bg-danger"
+      case "2":
+        return "bg-warning"
+      case "3":
+        return "bg-warning"
+      case "4":
+        return "bg-success"
+      case "5":
+        return "bg-success"
+      default:
+        console.log("Invalid Note");
+        break;
+    }
+  }
+
   onChangeHandler(event){
     let nota = 1;
     let puntos = parseInt(event.target.value, 10);
@@ -60,7 +82,7 @@ export default class AlumnoCarga extends Component {
         <td className="font-weight-bold">{est.person.ci}</td>
         <td>{est.person.names}</td>
         <td>
-          <div className="form-group">
+          <div className="form-group mb-0">
             <input
               type="text"
               className="form-control"
@@ -70,7 +92,7 @@ export default class AlumnoCarga extends Component {
               value={this.state.puntos} />
           </div>
         </td>
-        <td className="text-center font-weight-bold">
+        <td className={`text-center text-white font-weight-bold ${this.colorNota(this.state.nota)}`}>
           {this.state.nota}
         </td>
       </tr>

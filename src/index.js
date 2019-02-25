@@ -32,9 +32,11 @@ import ListaNotasMaterias from './containers/lista-notas';
 import ListarMaterias from './containers/listar-materias';
 import ListarExamenes from './containers/listar-examenes';
 import ListarCarreras from './containers/listar-carreras';
+import ListarMateriasCarrera from './containers/listar-materias-carrera';
 import ListarProfesores from './containers/listar-profesores';
 import ListarAdministradores from './containers/listar-administradores';
 import ListarEstudiantes from './containers/listar-estudiantes';
+import HomePage from './containers/home-page';
 //import PantallaExamenes from './containers/pantalla-examenes';
 import ExamenesDisponibles from './containers/listar-examenes-disponibles';
 import ListarExamenesInscripto from './containers/listar-examenes-inscripto';
@@ -99,6 +101,7 @@ if(isMobile()){
             <Route path="/examenes/:examen_id/cargar" component={CargaNotas} />
             <Route path="/examenes/:examen_id/editar" component={EditarExamen} />
             <Route path="/examenes" component={ListarExamenes} />
+            <Route path="/carreras/:carrera_id/materias" component={ListarMateriasCarrera} />
             <Route path="/carreras" component={ListarCarreras} />
             <Route path="/profesores/nuevo" component={CargarProfesor} />
             <Route path="/profesores/:profesor_id/editar" component={EditarProfesor} />
@@ -112,6 +115,7 @@ if(isMobile()){
             <Route path="/profesor/:idprofesor" component={CargarProfesor} />
             <Route path="/prueba" component={Prueba} />
             <Route path="/login" component={Login} />
+            <Route path="/" component={HomePage} />
           </Switch>
         </div>
       </BrowserRouter>
